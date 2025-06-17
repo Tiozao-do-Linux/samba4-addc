@@ -39,3 +39,12 @@ Vamos analisar suas opções:
 * Se o objetivo é estabilidade, compatibilidade com documentação e menor dor de cabeça, Debian é a melhor escolha.
 * Se você já está mais confortável com Ubuntu, especialmente em servidores, ele também é uma ótima base.
 * Use Fedora apenas se você precisa testar recursos muito recentes do Samba.
+
+## 🚀 Para rodar:
+```
+git clone git@github.com:Tiozao-do-Linux/samba4-dc.git
+
+cd samba4-dc
+docker-compose up --build
+
+```
