@@ -43,7 +43,7 @@ Vamos analisar suas opções:
 ## 🚀 Para rodar:
 Levando em consideração as três fontes, façamos as três imagens
 ```
-git clone git@github.com:Tiozao-do-Linux/samba4-dc.git
+git clone git@github.com:Tiozao-do-Linux/samba4-addc.git
 
 cd samba4-dc
 
