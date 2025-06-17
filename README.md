@@ -47,32 +47,56 @@ git clone git@github.com:Tiozao-do-Linux/samba4-addc.git
 cd samba4-addc
 
 # Criar imagens (buildar)
-docker build -t samba-dc-fedora -f Dockerfile.fedora .
-docker build -t samba-dc-debian -f Dockerfile.debian .
-docker build -t samba-dc-ubuntu -f Dockerfile.ubuntu .
+docker build -t samba-dc-fedora --no-cache fedora
+docker build -t samba-dc-debian --no-cache debian
+docker build -t samba-dc-ubuntu --no-cache ubuntu
 
 # Listar imagens
 docker images
 REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
-samba-dc-ubuntu         latest          1933157a0174   4 minutes ago    296MB
-samba-dc-fedora         latest          1b15d154761b   15 minutes ago   536MB
-samba-dc-debian         latest          c8799c7b739c   16 minutes ago   340MB
+samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
+samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
+samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 
-# A escolha é sua:
-##################
+# A escolha de qual imagem executar é sua:
+##########################################
 
-# Executar o container (deploy) fedora
-docker compose -f docker-compose.fedora.yml up -d
+# Executar o container (deploy) fedora <---- EU PREFIRO FEDORA
+docker compose -f fedora/docker-compose.yml up -d
+
+# OU
 
 # Executar o container (deploy) debian
-docker compose -f docker-compose.debian.yml up -d
+docker compose -f debian/docker-compose.yml up -d
+
+# OU
 
 # Executar o container (deploy) ubuntu
-docker compose -f docker-compose.ubuntu.yml up -d
+docker compose -f ubuntu/docker-compose.yml up -d
 
 
 # Entrar no container
 docker exec -it samba4-ad bash
+
+[root@dc1 /]# cat /etc/samba/smb.conf
+# Global parameters
+[global]
+	ad dc functional level = 2016
+	dns forwarder = 1.1.1.1 8.8.8.8
+	netbios name = DC1
+	realm = SEUDOMINIO.COM.BR
+	server role = active directory domain controller
+	template shell = /bin/bash
+	workgroup = SEUDOMINIO
+	idmap_ldb:use rfc2307 = yes
+
+[sysvol]
+	path = /var/lib/samba/sysvol
+	read only = No
+
+[netlogon]
+	path = /var/lib/samba/sysvol/seudominio.com.br/scripts
+	read only = No
 
 [root@dc1 /]# cat /etc/os-release 
 NAME="Fedora Linux"

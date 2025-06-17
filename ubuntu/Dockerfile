@@ -13,14 +13,6 @@ rm -rf /var/lib/apt/lists/*
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
 
-# # Define variáveis padrão
-# ENV _REALM="SEUDOMINIO.COM.BR" \
-#    _SYSVOL="`echo $_REALM | tr '[:upper:]' '[:lower:]'`" \
-#    _DOMAIN="SEUDOMINIO" \
-#    _PASSWORD="SuperSecretPassword@2024" \
-#    _NETBIOS="`hostname -s`" \
-#    _TEMP_PASSWORD="TempSuperSecretPassword@2024"
-
 # Copia o entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

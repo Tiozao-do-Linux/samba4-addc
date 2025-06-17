@@ -1,20 +1,17 @@
-FROM fedora:42
+FROM debian:bookworm-slim
+
+# Desabilitar modo interativo para pacotes do debian apenas na fase de construção
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
 RUN <<EOF
-dnf -y upgrade --refresh
-dnf install -y samba samba-dc samba-client krb5-workstation
-dnf install -y net-tools htop ccze duf hostname nmap
+apt-get update
+apt-get install -y samba samba-common-bin smbclient krb5-config krb5-user
+apt-get install -y htop tree iputils-ping curl jq net-tools nmap
+apt-get clean
+rm -rf /var/lib/apt/lists/*
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
-
-# # Define variáveis padrão
-# ENV _REALM="SEUDOMINIO.COM.BR" \
-#    _SYSVOL="`echo $_REALM | tr '[:upper:]' '[:lower:]'`" \
-#    _DOMAIN="SEUDOMINIO" \
-#    _PASSWORD="SuperSecretPassword@2024" \
-#    _NETBIOS="`hostname -s`" \
-#    _TEMP_PASSWORD="TempSuperSecretPassword@2024"
 
 # Copia o entrypoint
 COPY entrypoint.sh /entrypoint.sh

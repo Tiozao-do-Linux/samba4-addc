@@ -1,0 +1,21 @@
+services:
+  samba-ad:
+    build:
+      context: ./ubuntu
+      dockerfile: Dockerfile
+    container_name: samba4-ad
+    hostname: dc1
+    network_mode: "host"
+    env_file:
+      - ../.env
+    volumes:
+      - samba_etc:/etc/samba
+      - samba_lib:/var/lib/samba
+      - samba_logs:/var/log/samba
+    tty: true
+    stdin_open: true
+
+volumes:
+  samba_etc:
+  samba_lib:
+  samba_logs:
