@@ -16,6 +16,6 @@ services:
     stdin_open: true
 
 volumes:
-  samba_etc:
-  samba_lib:
-  samba_logs:
+  ubuntu_samba_etc:
+  ubuntu_samba_lib:
+  ubuntu_samba_logs:

@@ -36,28 +36,96 @@ Vamos analisar suas opções:
     * Imagem maior e mais “pesada” para builds.
 
 ## 🎯 Conclusão:
-* Se o objetivo é estabilidade, compatibilidade com documentação e menor dor de cabeça, Debian é a melhor escolha.
-* Se você já está mais confortável com Ubuntu, especialmente em servidores, ele também é uma ótima base.
-* Use Fedora apenas se você precisa testar recursos muito recentes do Samba.
+* Se o objetivo é estabilidade, compatibilidade com documentação e menor dor de cabeça, `Debian` é a melhor escolha.
+* Se você já está mais confortável com `Ubuntu`, especialmente em servidores, ele também é uma ótima base.
+* Use `Fedora` apenas se você precisa testar recursos muito recentes do Samba.
 
 ## 🚀 Para rodar:
+Levando em consideração as três fontes, façamos as três imagens
 ```
 git clone git@github.com:Tiozao-do-Linux/samba4-dc.git
 
 cd samba4-dc
 
+# Criar imagens (buildar)
 docker build -t samba-dc-fedora -f Dockerfile.fedora .
 docker build -t samba-dc-debian -f Dockerfile.debian .
 docker build -t samba-dc-ubuntu -f Dockerfile.ubuntu .
 
+# Listar imagens
 docker images
 REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
 samba-dc-ubuntu         latest          1933157a0174   4 minutes ago    296MB
 samba-dc-fedora         latest          1b15d154761b   15 minutes ago   536MB
 samba-dc-debian         latest          c8799c7b739c   16 minutes ago   340MB
 
-docker compose up -d samba-dc-fedora
-docker compose up -d samba-dc-debian
-docker compose up -d samba-dc-ubuntu
+# A escolha é sua:
+##################
 
+# Executar o container (deploy) fedora
+docker compose -f docker-compose.fedora.yml up -d
+
+# Executar o container (deploy) debian
+docker compose -f docker-compose.debian.yml up -d
+
+# Executar o container (deploy) ubuntu
+docker compose -f docker-compose.ubuntu.yml up -d
+
+
+# Entrar no container
+docker exec -it samba4-ad bash
+
+[root@dc1 /]# cat /etc/os-release 
+NAME="Fedora Linux"
+VERSION="42 (Container Image)"
+RELEASE_TYPE=stable
+ID=fedora
+VERSION_ID=42
+VERSION_CODENAME=""
+PLATFORM_ID="platform:f42"
+PRETTY_NAME="Fedora Linux 42 (Container Image)"
+ANSI_COLOR="0;38;2;60;110;180"
+LOGO=fedora-logo-icon
+CPE_NAME="cpe:/o:fedoraproject:fedora:42"
+DEFAULT_HOSTNAME="fedora"
+HOME_URL="https://fedoraproject.org/"
+DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/f42/system-administrators-guide/"
+SUPPORT_URL="https://ask.fedoraproject.org/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+REDHAT_BUGZILLA_PRODUCT="Fedora"
+REDHAT_BUGZILLA_PRODUCT_VERSION=42
+REDHAT_SUPPORT_PRODUCT="Fedora"
+REDHAT_SUPPORT_PRODUCT_VERSION=42
+SUPPORT_END=2026-05-13
+VARIANT="Container Image"
+VARIANT_ID=container
+
+[root@dc1 /]# nmap localhost
+Starting Nmap 7.92 ( https://nmap.org ) at 2025-06-17 17:40 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000050s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 981 closed tcp ports (reset)
+PORT      STATE SERVICE
+22/tcp    open  ssh
+53/tcp    open  domain
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+631/tcp   open  ipp
+636/tcp   open  ldapssl
+3268/tcp  open  globalcatLDAP
+3269/tcp  open  globalcatLDAPssl
+3389/tcp  open  ms-wbt-server
+7070/tcp  open  realserver
+9090/tcp  open  zeus-admin
+32769/tcp open  filenet-rpc
+49152/tcp open  unknown
+49153/tcp open  unknown
+49154/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 0.21 seconds
 ```

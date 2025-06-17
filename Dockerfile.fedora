@@ -1,21 +1,20 @@
 FROM fedora:42
 
-
 # Install necessary packages
 RUN <<EOF
 dnf -y upgrade --refresh
-dnf install -y net-tools htop ccze duf hostname
 dnf install -y samba samba-dc samba-client krb5-workstation
+dnf install -y net-tools htop ccze duf hostname nmap
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
 
-# Define variáveis padrão
-ENV _REALM="SEUDOMINIO.COM.BR" \
-   _SYSVOL="`echo $_REALM | tr '[:upper:]' '[:lower:]'`" \
-   _DOMAIN="SEUDOMINIO" \
-   _PASSWORD="SuperSecretPassword@2024" \
-   _NETBIOS="`hostname -s`" \
-   _TEMP_PASSWORD="TempSuperSecretPassword@2024"
+# # Define variáveis padrão
+# ENV _REALM="SEUDOMINIO.COM.BR" \
+#    _SYSVOL="`echo $_REALM | tr '[:upper:]' '[:lower:]'`" \
+#    _DOMAIN="SEUDOMINIO" \
+#    _PASSWORD="SuperSecretPassword@2024" \
+#    _NETBIOS="`hostname -s`" \
+#    _TEMP_PASSWORD="TempSuperSecretPassword@2024"
 
 # Copia o entrypoint
 COPY entrypoint.sh /entrypoint.sh

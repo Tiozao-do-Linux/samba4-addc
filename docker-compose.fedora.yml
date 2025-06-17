@@ -16,6 +16,6 @@ services:
     stdin_open: true
 
 volumes:
-  samba_etc:
-  samba_lib:
-  samba_logs:
+  fedora_samba_etc:
+  fedora_samba_lib:
+  fedora_samba_logs:
