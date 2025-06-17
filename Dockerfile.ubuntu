@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM ubuntu:22.04
 
 # Desabilitar modo interativo para pacotes do debian apenas na fase de construção
 ARG DEBIAN_FRONTEND=noninteractive
@@ -14,11 +14,12 @@ rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log
 EOF
 
 # Define variáveis padrão
-ENV REALM=EXEMPLO.LAN \
-    DOMAIN=EXEMPLO \
-    ADMIN_PASS=SenhaForte123 \
-    DNS_BACKEND=SAMBA_INTERNAL \
-    SERVER_ROLE=dc
+ENV _REALM="SEUDOMINIO.COM.BR" \
+   _SYSVOL="`echo $_REALM | tr '[:upper:]' '[:lower:]'`" \
+   _DOMAIN="SEUDOMINIO" \
+   _PASSWORD="SuperSecretPassword@2024" \
+   _NETBIOS="`hostname -s`" \
+   _TEMP_PASSWORD="TempSuperSecretPassword@2024"
 
 # Copia o entrypoint
 COPY entrypoint.sh /entrypoint.sh
@@ -30,10 +31,5 @@ VOLUME /etc/samba /var/lib/samba /var/log/samba
 # Expondo portas
 EXPOSE 53/udp 53/tcp 88/tcp 88/udp 135/tcp 137/udp 138/udp 139/tcp \
        389/tcp 389/udp 445/tcp 464/tcp 464/udp 3268/tcp 3269/tcp
-
-## Removendo arquivos
-#RUN << EOF
-#rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
-#EOF
 
 ENTRYPOINT ["/entrypoint.sh"]

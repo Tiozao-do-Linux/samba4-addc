@@ -45,6 +45,19 @@ Vamos analisar suas opções:
 git clone git@github.com:Tiozao-do-Linux/samba4-dc.git
 
 cd samba4-dc
-docker-compose up --build
+
+docker build -t samba-dc-fedora -f Dockerfile.fedora .
+docker build -t samba-dc-debian -f Dockerfile.debian .
+docker build -t samba-dc-ubuntu -f Dockerfile.ubuntu .
+
+docker images
+REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
+samba-dc-ubuntu         latest          1933157a0174   4 minutes ago    296MB
+samba-dc-fedora         latest          1b15d154761b   15 minutes ago   536MB
+samba-dc-debian         latest          c8799c7b739c   16 minutes ago   340MB
+
+docker compose up -d samba-dc-fedora
+docker compose up -d samba-dc-debian
+docker compose up -d samba-dc-ubuntu
 
 ```
