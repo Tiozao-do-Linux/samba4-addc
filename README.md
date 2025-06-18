@@ -85,11 +85,11 @@ CONTAINER ID   IMAGE                          COMMAND            CREATED        
 docker volume ls | grep samba
 ```
 
-### Entrar no container (note que o prompt muda para [root@dc1 /])
+### Entrar no container (note que o prompt muda para [root@dc01 /])
 ```
 docker exec -it samba4-ad bash
 
-[root@dc1 /]# cat /etc/samba/smb.conf
+[root@dc01 /]# cat /etc/samba/smb.conf
 # Global parameters
 [global]
 	ad dc functional level = 2016
@@ -109,14 +109,13 @@ docker exec -it samba4-ad bash
 	path = /var/lib/samba/sysvol/seudominio.com.br/scripts
 	read only = No
 
-[root@dc1 /]# nmap localhost
-Starting Nmap 7.92 ( https://nmap.org ) at 2025-06-17 17:40 UTC
+[root@dc01 /]# nmap localhost
+Starting Nmap 7.92 ( https://nmap.org ) at 2025-06-18 23:37 UTC
 Nmap scan report for localhost (127.0.0.1)
-Host is up (0.0000050s latency).
+Host is up (0.000011s latency).
 Other addresses for localhost (not scanned): ::1
-Not shown: 981 closed tcp ports (reset)
+Not shown: 987 closed tcp ports (reset)
 PORT      STATE SERVICE
-22/tcp    open  ssh
 53/tcp    open  domain
 88/tcp    open  kerberos-sec
 135/tcp   open  msrpc
@@ -124,19 +123,14 @@ PORT      STATE SERVICE
 389/tcp   open  ldap
 445/tcp   open  microsoft-ds
 464/tcp   open  kpasswd5
-631/tcp   open  ipp
 636/tcp   open  ldapssl
 3268/tcp  open  globalcatLDAP
 3269/tcp  open  globalcatLDAPssl
-3389/tcp  open  ms-wbt-server
-7070/tcp  open  realserver
-9090/tcp  open  zeus-admin
-32769/tcp open  filenet-rpc
 49152/tcp open  unknown
 49153/tcp open  unknown
 49154/tcp open  unknown
 
-Nmap done: 1 IP address (1 host up) scanned in 0.21 seconds
+Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 ```
 
 ## Hub do Jarbelix
