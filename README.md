@@ -6,7 +6,7 @@ Para criar uma imagem Docker com Samba4 atuando como um Active Directory Domain 
 
 Vamos analisar algumas das suas opções:
 
-## ✅ 1. Debian (recomendado)
+## ✅ 1. Debian
 * Prós:
     * Samba é bem suportado no Debian, com pacotes atualizados.
     * Documentação da comunidade Samba costuma ter exemplos com Debian.
@@ -24,7 +24,7 @@ Vamos analisar algumas das suas opções:
     * A imagem é um pouco maior que a do Debian.
     * Pode ter mais camadas de complexidade em relação ao systemd, dependendo do que você precisa rodar.
 
-## ⚠️ 3. Fedora 42
+## ✅ 3. Fedora 42  (recomendado)
 * Prós:
     * Samba costuma estar mais atualizado (mais próximo do upstream).
     * Bom para testes ou ambientes onde se quer explorar funcionalidades recentes.
@@ -61,7 +61,7 @@ samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 # A escolha de qual imagem executar é sua:
 ##########################################
 
-# Executar o container (deploy) fedora <---- EU PREFIRO FEDORA
+# Executar o container (deploy) fedora ( Recomendado por ser mais atualizado )
 docker compose -f fedora/docker-compose.yml up -d
 
 # OU
