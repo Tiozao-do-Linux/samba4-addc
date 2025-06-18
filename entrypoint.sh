@@ -6,7 +6,8 @@ SAMBA_LIB_DIR="/var/lib/samba"
 SAMBA_LOG_DIR="/var/log/samba"
 
 if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
-    cat << _EOF
+    echo "Provisionando ${_DOMAIN} ..."
+    cat << '_EOF'
  ____________________________________________________________________________
 /\                                                                           \
 \_|                       Active Directory com Samba4                        |
@@ -14,7 +15,6 @@ if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
   |   _______________________________________________________________________|_
    \_/_________________________________________________________________________/   
 
-Provisionando ${_DOMAIN} ...
 _EOF
     sleep 5
     samba-tool domain provision \
