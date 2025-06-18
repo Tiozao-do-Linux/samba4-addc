@@ -3,6 +3,8 @@ services:
     image: jarbelix/samba4-addc-fedora
     container_name: samba4-ad
     hostname: dc1
+    cap_add:
+      - SYS_ADMIN
     dns:
       - 127.0.0.1
       - 1.1.1.1
