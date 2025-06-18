@@ -18,7 +18,10 @@ jobs:
 
       - name: Login no Docker Hub
         run: docker login ${{ vars.DOCKER_REGISTRY }} -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        
+
+      - name: Logout do Docker Hub
+        run: docker logout ${{ vars.DOCKER_REGISTRY }}
+
       - name: Checkout do repositório de código
         uses: actions/checkout@v4
 
@@ -35,3 +38,12 @@ jobs:
             registry: ${{ vars.DOCKER_REGISTRY }}
             username: ${{ vars.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Executar commandos linux
+        run: |
+          AGORA=`date +%Y/%m/%d-%H:%M:%S`
+          echo "date ===> $AGORA"
+          echo "======================================================"
+          cat /etc/os-release
+          echo "======================================================"
+          docker images

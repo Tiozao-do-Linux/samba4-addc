@@ -30,7 +30,7 @@ Vamos analisar algumas das suas opções:
     * Bom para testes ou ambientes onde se quer explorar funcionalidades recentes.
 * Contras:
     * Fedora não é tão comum em servidores de produção.
-    * Atualizações frequentes (ciclo de vida mais curto).
+    * Atualizações frequentes (ciclo de vida mais curto), embora possa ser atualizado entre versões facilmente
     * Pode ser mais difícil encontrar tutoriais ou exemplos prontos focados nesse uso.
     * Imagem maior e mais “pesada” para builds.
 
@@ -39,45 +39,32 @@ Vamos analisar algumas das suas opções:
 * Se você já está mais confortável com `Ubuntu`, especialmente em servidores, ele também é uma ótima base.
 * Use `Fedora` apenas se você precisa testar recursos muito recentes do Samba.
 
-## 🚀 Para rodar:
-Levando em consideração as três fontes, façamos as três imagens
+## 🚀 Como rodar?
+
+### Clonar o repositório
 ```
 git clone git@github.com:Tiozao-do-Linux/samba4-addc.git
 
+# entrar no diretório
 cd samba4-addc
-
-# Criar imagens (buildar)
-docker build -t samba-dc-fedora --no-cache fedora
-docker build -t samba-dc-debian --no-cache debian
-docker build -t samba-dc-ubuntu --no-cache ubuntu
-
-# Listar imagens
-docker images
-REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
-samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
-samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
-samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
-
-# A escolha de qual imagem executar é sua:
-##########################################
-
-# Executar o container (deploy) fedora ( Recomendado por ser mais atualizado )
-cd fedora
+```
+### Executar o container (deploy) fedora ( Recomendado por ser mais atualizado )
+```
 docker compose up -d
+```
+
+### Ver logs
+```
 docker compose logs -f
+```
 
-# OU
+### Listar os volumes
+```
+docker volume ls | grep samba
+```
 
-# Executar o container (deploy) debian
-docker compose -f debian/docker-compose.yml up -d
-
-# OU
-
-# Executar o container (deploy) ubuntu
-docker compose -f ubuntu/docker-compose.yml up -d
-
-
-# Entrar no container
+### Entrar no container (note que o prompt muda para [root@dc1 /])
+```
 docker exec -it samba4-ad bash
 
 [root@dc1 /]# cat /etc/samba/smb.conf
@@ -99,31 +86,6 @@ docker exec -it samba4-ad bash
 [netlogon]
 	path = /var/lib/samba/sysvol/seudominio.com.br/scripts
 	read only = No
-
-[root@dc1 /]# cat /etc/os-release 
-NAME="Fedora Linux"
-VERSION="42 (Container Image)"
-RELEASE_TYPE=stable
-ID=fedora
-VERSION_ID=42
-VERSION_CODENAME=""
-PLATFORM_ID="platform:f42"
-PRETTY_NAME="Fedora Linux 42 (Container Image)"
-ANSI_COLOR="0;38;2;60;110;180"
-LOGO=fedora-logo-icon
-CPE_NAME="cpe:/o:fedoraproject:fedora:42"
-DEFAULT_HOSTNAME="fedora"
-HOME_URL="https://fedoraproject.org/"
-DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/f42/system-administrators-guide/"
-SUPPORT_URL="https://ask.fedoraproject.org/"
-BUG_REPORT_URL="https://bugzilla.redhat.com/"
-REDHAT_BUGZILLA_PRODUCT="Fedora"
-REDHAT_BUGZILLA_PRODUCT_VERSION=42
-REDHAT_SUPPORT_PRODUCT="Fedora"
-REDHAT_SUPPORT_PRODUCT_VERSION=42
-SUPPORT_END=2026-05-13
-VARIANT="Container Image"
-VARIANT_ID=container
 
 [root@dc1 /]# nmap localhost
 Starting Nmap 7.92 ( https://nmap.org ) at 2025-06-17 17:40 UTC
@@ -153,4 +115,23 @@ PORT      STATE SERVICE
 49154/tcp open  unknown
 
 Nmap done: 1 IP address (1 host up) scanned in 0.21 seconds
+```
+
+## Hub do Jarbelix
+* https://hub.docker.com/u/jarbelix
+
+## Se quiser criar imagens locais (buildar)
+```
+docker build -t samba-dc-fedora --no-cache fedora
+docker build -t samba-dc-debian --no-cache debian
+docker build -t samba-dc-ubuntu --no-cache ubuntu
+```
+
+## Listar imagens criadas localmente
+```
+docker images
+REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
+samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
+samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
+samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 ```
