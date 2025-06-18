@@ -16,6 +16,9 @@ jobs:
     
     steps:
 
+      - name: Login no Docker Hub
+        run: docker login ${{ vars.DOCKER_REGISTRY }} -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        
       - name: Checkout do repositório de código
         uses: actions/checkout@v4
 
@@ -29,6 +32,6 @@ jobs:
             image: jarbelix/samba4-addc-fedora
             tags: v1,latest
             dockerfile: Dockerfile
-            registry: docker.io
-            username: ${{ secrets.DOCKER_USERNAME }}
+            registry: ${{ vars.DOCKER_REGISTRY }}
+            username: ${{ vars.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
