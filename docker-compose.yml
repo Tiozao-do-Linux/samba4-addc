@@ -3,7 +3,6 @@ services:
     image: jarbelix/samba4-addc-fedora
     container_name: samba4-ad
     hostname: dc1
-    network_mode: "host"
     dns:
       - 127.0.0.1
       - 1.1.1.1
@@ -14,6 +13,22 @@ services:
       - samba_etc:/etc/samba
       - samba_lib:/var/lib/samba
       - samba_logs:/var/log/samba
+    # network_mode: "host"
+    ports:
+      # - "53:53/udp" # DNS
+      # - "53:53/tcp" # DNS
+      - "88:88/tcp" # Kerberos
+      - "88:88/udp" # Kerberos
+      - "135:135/tcp" # RPC
+      - "139:139/tcp" # NetBIOS
+      - "445:445/tcp" # SMB
+      - "464:464/tcp" # Kpasswd5
+      - "389:389/tcp" # LDAP
+      - "389:389/udp" # LDAP
+      - "636:636/tcp" # LDAP SSL
+      - "3268:3268/tcp" # LDAP GC
+      - "3269:3269/tcp" # LDAP GC SSL
+    restart: unless-stopped
     tty: true
     stdin_open: true
 
