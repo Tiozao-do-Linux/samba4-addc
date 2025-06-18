@@ -43,7 +43,7 @@ Vamos analisar algumas das suas opções:
 
 ### Clonar o repositório
 ```
-git clone git@github.com:Tiozao-do-Linux/samba4-addc.git
+git clone https://github.com/Tiozao-do-Linux/samba4-addc.git
 
 # entrar no diretório
 cd samba4-addc
