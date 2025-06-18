@@ -9,7 +9,7 @@ services:
       - 1.1.1.1
       - 8.8.8.8
     env_file:
-      - ../.env
+      - .env
     volumes:
       - samba_etc:/etc/samba
       - samba_lib:/var/lib/samba

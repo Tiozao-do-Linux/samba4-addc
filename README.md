@@ -26,7 +26,7 @@ Vamos analisar algumas das suas opções:
 
 ## ✅ 3. Fedora 42  (recomendado)
 * Prós:
-    * Samba costuma estar mais atualizado (mais próximo do upstream).
+    * Costuma estar mais atualizado (mais próximo do upstream). Hoje, 18/Jun/2025 a versão do samba instalada é 4.22.2 que corresponde com a última release oficial.
     * Bom para testes ou ambientes onde se quer explorar funcionalidades recentes.
 * Contras:
     * Fedora não é tão comum em servidores de produção.
@@ -56,6 +56,13 @@ docker compose up -d
 ### Ver logs
 ```
 docker compose logs -f
+```
+
+### Listar os containers em execução
+```
+docker ps
+CONTAINER ID   IMAGE                          COMMAND            CREATED         STATUS                PORTS      NAMES
+13b91ad25746   jarbelix/samba4-addc-fedora    "/entrypoint.sh"   5 minutes ago   Up 5 minutes                     samba4-ad
 ```
 
 ### Listar os volumes
