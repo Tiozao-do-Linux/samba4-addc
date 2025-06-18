@@ -16,9 +16,10 @@ if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
         --dns-backend=SAMBA_INTERNAL \
         --option="dns forwarder = 1.1.1.1 8.8.8.8" \
         --option="template shell = /bin/bash" \
-    # Copiar a configuração gerada para o kerberos
-    cp /var/lib/samba/private/krb5.conf /etc/
 fi
+
+# Copiar a configuração gerada para o kerberos
+cp /var/lib/samba/private/krb5.conf /etc/
 
 echo "[INFO] Domínio ${_DOMAIN} já provisionado. Iniciando Samba..."
 exec samba -i -M single

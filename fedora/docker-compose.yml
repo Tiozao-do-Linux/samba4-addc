@@ -5,6 +5,10 @@ services:
     container_name: samba4-ad
     hostname: dc1
     network_mode: "host"
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+      - 8.8.8.8
     env_file:
       - ../.env
     volumes:

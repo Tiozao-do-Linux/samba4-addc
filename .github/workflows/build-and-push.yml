@@ -1,0 +1,33 @@
+# Your workflow name
+name: Workflow para Build e Psush
+
+# Run workflow on every push to main branch
+# Reference: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+on:
+  push:
+    branches: [ main ]
+
+# Your workflows jobs
+# Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
+jobs:
+
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      - name: Checkout do repositório de código
+        uses: actions/checkout@v4
+
+      - name: Listar arquivos
+        run: ls -lat
+
+      - name: Build & push Docker - linux/amd64
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+            image: jarbelix/samba4-addc-fedora
+            tags: v1,latest
+            dockerfile: fedora/Dockerfile
+            registry: docker.io
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}

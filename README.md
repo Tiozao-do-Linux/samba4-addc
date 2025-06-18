@@ -62,7 +62,9 @@ samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 ##########################################
 
 # Executar o container (deploy) fedora ( Recomendado por ser mais atualizado )
-docker compose -f fedora/docker-compose.yml up -d
+cd fedora
+docker compose up -d
+docker compose logs -f
 
 # OU
 
