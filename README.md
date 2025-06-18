@@ -94,7 +94,7 @@ docker exec -it samba4-ad bash
 [global]
 	ad dc functional level = 2016
 	dns forwarder = 1.1.1.1 8.8.8.8
-	netbios name = DC1
+	netbios name = DC01
 	realm = SEUDOMINIO.COM.BR
 	server role = active directory domain controller
 	template shell = /bin/bash
