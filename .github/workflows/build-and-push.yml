@@ -20,7 +20,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Listar arquivos
-        run: ls -lat
+        run: |
+          ls -lat
+          cd fedora
+          ls -lat
+
 
       - name: Build & push Docker - linux/amd64
         uses: mr-smithers-excellent/docker-build-push@v6
@@ -28,6 +32,7 @@ jobs:
             image: jarbelix/samba4-addc-fedora
             tags: v1,latest
             dockerfile: fedora/Dockerfile
+            context: fedora
             registry: docker.io
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
