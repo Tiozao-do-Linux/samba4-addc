@@ -1,5 +1,5 @@
 # Your workflow name
-name: Workflow para Build e Psush
+name: Workflow para Build e Push
 
 # Run workflow on every push to main branch
 # Reference: https://docs.github.com/en/actions/reference/events-that-trigger-workflows

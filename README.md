@@ -145,6 +145,15 @@ PORT      STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 ```
+## Remover TUDO do seu ambiente
+
+Se algo deu errado e não funcionou como esperado e quiser remover o container, imagem e volumes de seu ambiente local
+```
+docker stop samba4-ad
+docker rm samba4-ad
+docker rmi jarbelix/samba4-addc-fedora
+docker volume rm $( docker volume ls -q | grep samba )
+```
 
 ## Hub do Jarbelix
 * https://hub.docker.com/u/jarbelix
