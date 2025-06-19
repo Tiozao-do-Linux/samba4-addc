@@ -56,14 +56,11 @@ git clone https://github.com/Tiozao-do-Linux/samba4-addc.git
 # entrar no diretório
 cd samba4-addc
 cp .env.example .env
-
 ```
 
 ### Configurar o seu domínio e senha do Active Directory
 
 * Por default, o arquivo .env.example contém algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
-* Personalize suas informações de acordo com a Wiki abaixo
-	* https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
 ```
 _REALM="SEUDOMINIO.COM.BR"
 _SYSVOL="seudominio.com.br"
@@ -145,6 +142,98 @@ PORT      STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 ```
+
+## Configurações do domínio (opcional)
+
+* Tenha certeza que está dentro do container visualizando o prompt `[root@dc01 /]`
+```
+# Não expirar senha do Administrador
+samba-tool user setexpiry Administrator --noexpiry
+
+# Alterando Políticas do Domínio
+samba-tool domain passwordsettings set --complexity=on --history-length=3 --min-pwd-age=0 --max-pwd-age=365 --min-pwd-length=8
+
+# Validando politicas do Domínio
+samba-tool domain passwordsettings show
+
+# Validar a versão do esquema do AD em um Samba DC
+samba-tool domain level show
+
+# Criar grupo de usuários
+samba-tool group add 'Turma da Monica' --description "Grupo de Usuários da Turma da Mônica"
+
+# Criando OUs
+samba-tool ou add 'OU=Presidente'
+samba-tool ou add 'OU=Financeiro'
+samba-tool ou add 'OU=RH'
+samba-tool ou add 'OU=TI'
+samba-tool ou add 'OU=Contabil'
+samba-tool ou add 'OU=Producao'
+samba-tool ou add 'OU=Comercial'
+samba-tool ou add 'OU=Logistica'
+
+# Criando os usuários em suas OUs
+samba-tool user add seu.cebola          --random-password --use-username-as-cn --userou='OU=Presidente'
+
+samba-tool user add cebolinha           --random-password --use-username-as-cn --userou='OU=Financeiro'
+samba-tool user add anjinho             --random-password --use-username-as-cn --userou='OU=Financeiro'
+
+samba-tool user add monica              --random-password --use-username-as-cn --userou='OU=RH'
+samba-tool user add dudu                --random-password --use-username-as-cn --userou='OU=RH'
+samba-tool user add rolo                --random-password --use-username-as-cn --userou='OU=RH'
+
+samba-tool user add xaveco              --random-password --use-username-as-cn --userou='OU=TI'
+samba-tool user add horacio             --random-password --use-username-as-cn --userou='OU=TI'
+samba-tool user add marina              --random-password --use-username-as-cn --userou='OU=TI'
+
+samba-tool user add cascao              --random-password --use-username-as-cn --userou='OU=Contabil'
+samba-tool user add ze.vampir           --random-password --use-username-as-cn --userou='OU=Contabil'
+
+samba-tool user add magali              --random-password --use-username-as-cn --userou='OU=Producao'
+samba-tool user add rosinha             --random-password --use-username-as-cn --userou='OU=Producao'
+samba-tool user add carminha.frufru     --random-password --use-username-as-cn --userou='OU=Producao'
+
+samba-tool user add chico.bento         --random-password --use-username-as-cn --userou='OU=Comercial'
+samba-tool user add capitao.feio        --random-password --use-username-as-cn --userou='OU=Comercial'
+samba-tool user add piteco              --random-password --use-username-as-cn --userou='OU=Comercial'
+
+samba-tool user add franjinha           --random-password --use-username-as-cn --userou='OU=Logistica'
+samba-tool user add rita.najura         --random-password --use-username-as-cn --userou='OU=Logistica'
+samba-tool user add juca                --random-password --use-username-as-cn --userou='OU=Logistica'
+
+# Adicionando usuários aos Grupos
+samba-tool group addmembers 'Turma da Monica' monica,cebolinha,cascao,magali
+
+samba-tool group addmembers 'Turma da Monica' seu.cebola,anjinho,dudu,rolo,xaveco,horacio,marina,ze.vampir,rosinha,carminha.frufru,chico.bento,capitao.feio,piteco,franjinha,rita.najura,juca
+
+# Listando os Grupos e Membros de Grupos
+samba-tool group list
+
+samba-tool group listmembers 'Turma da Monica'
+
+# Listando as OUs e Objetos da OU
+samba-tool ou list
+
+samba-tool ou listobjects OU=Financeiro
+
+# Adicionando usuário tiozao ao Domínio
+samba-tool user add tiozao ${_TEMP_PASSWORD} --use-username-as-cn \
+--given-name="Tiozão" --surname="do Linux" --job-title="Título do Cargo" \
+--company="Nome da Empresa" --department="Nome do Departamento" \
+--description="Descrição Opcional" --mail-address=jarbas.junior@gmail.com \
+--telephone-number="+55 67 9 81183482" --physical-delivery-office="Endereço Completo" \
+--login-shell=/bin/bash
+
+# Listando propriedades de um usuário
+samba-tool user show tiozao
+
+# Trocar a senha do usuário tiozao que foi criado como senha ${_TEMP_PASSWORD} para ${_PASSWORD}
+samba-tool user setpassword tiozao --newpassword=${_PASSWORD}
+
+# Listando todos usuários do domínio
+samba-tool user list
+```
+
 ## Remover TUDO do seu ambiente
 
 Se algo deu errado e não funcionou como esperado e quiser remover o container, imagem e volumes de seu ambiente local
@@ -157,6 +246,13 @@ docker volume rm $( docker volume ls -q | grep samba )
 
 ## Hub do Jarbelix
 * https://hub.docker.com/u/jarbelix
+
+## Links Úteis pra deploy
+
+* Dockerfile reference - https://docs.docker.com/reference/dockerfile/
+* Docker Best Pratices - https://docs.docker.com/build/building/best-practices/
+* Choosing RUN, CMD and ENTRYPOINT - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/
+* CI/CD pipeline - https://github.com/marketplace/actions/docker-build-push-action
 
 ## Se quiser criar imagens locais (buildar)
 ```
@@ -173,3 +269,5 @@ samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
 samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
 samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 ```
+# Desejando conhecer mais sobre Samba4, acesse a documentação que disponibilizei:
+* https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
