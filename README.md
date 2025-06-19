@@ -1,11 +1,11 @@
-# Samba4 como Active Directory Domain Controller (AD DC).
+# Active Directory Domain Controller com Samba4.
 ```
  ____________________________________________________________________________
 /\                                                                           \
-\_|                       Active Directory com Samba4                        |
-  |                                                                          |
+\_|                 Active Directory Domain Controler - ADDC                 |
+  |                             Linux com Samba4                             |
   |   _______________________________________________________________________|_
-   \_/_________________________________________________________________________/   
+   \_/_________________________________________________________________________/
 
 ```
 Tá em dúvida se deve utilizar como base uma imagem do Ubuntu ou do Debian ou do Fedora 42
