@@ -260,13 +260,19 @@ samba-tool user list
 > No Windows é super simples de instalar (next, next, finish).
 > 
 > No Linux Desktop é mais fácil ainda, tem no **Gerenciador de Pacotes** a versão Flatpack(Flathub).
+> 
+> ### Configuração e Visualização
+> ![Apache-Directory-Studio-Connection-Netwok](screenshots/Apache-Directory-Studio-Connection-Netwok.png)
+> 
+> ![Apache-Directory-Studio-Connection-Authentication](screenshots/Apache-Directory-Studio-Connection-Authentication.png)
+> 
+> ![Apache-Directory-Studio-Usuario-Tiozao](screenshots/Apache-Directory-Studio-Usuario-Tiozao.png)
 
-### Configuração e Visualização
-![Apache-Directory-Studio-Connection-Netwok](screenshots/Apache-Directory-Studio-Connection-Netwok.png)
+> [!TIP]
+> Uma outra forma de visualizar o LDAP é através do **LDAP Admin** disponível no site (http://www.ldapadmin.org/) que aparentemente está abandonado desde 2012, mas ainda está disponível no https://sourceforge.net/projects/ldapadmin/
+> 
+> ![LDAP-Admin](screenshots/appwin.jpg)
 
-![Apache-Directory-Studio-Connection-Authentication](screenshots/Apache-Directory-Studio-Connection-Authentication.png)
-
-![Apache-Directory-Studio-Usuario-Tiozao](screenshots/Apache-Directory-Studio-Usuario-Tiozao.png)
 
 ## Remover TUDO do seu ambiente
 
