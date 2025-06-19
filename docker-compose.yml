@@ -2,7 +2,7 @@ services:
   samba-ad:
     image: jarbelix/samba4-addc-fedora
     container_name: samba4-ad
-    hostname: ${_NETBIOS:-dc01
+    hostname: ${_NETBIOS:-dc01}
     cap_add:
       - SYS_ADMIN
     dns:
