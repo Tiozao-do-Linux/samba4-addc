@@ -1,6 +1,14 @@
 # Samba4 como Active Directory Domain Controller (AD DC).
+```
+ ____________________________________________________________________________
+/\                                                                           \
+\_|                       Active Directory com Samba4                        |
+  |                                                                          |
+  |   _______________________________________________________________________|_
+   \_/_________________________________________________________________________/   
 
-Tá em dúvida se utilizo como base uma imagem do Ubuntu ou do Debian ou do Fedora 42
+```
+Tá em dúvida se deve utilizar como base uma imagem do Ubuntu ou do Debian ou do Fedora 42
 
 Para criar uma imagem Docker com Samba4 atuando como um Active Directory Domain Controller (AD DC), a escolha da imagem base influencia diretamente na facilidade de instalação, suporte da comunidade e manutenção da imagem.
 
