@@ -247,13 +247,6 @@ docker volume rm $( docker volume ls -q | grep samba )
 ## Hub do Jarbelix
 * https://hub.docker.com/u/jarbelix
 
-## Links Úteis pra deploy
-
-* Dockerfile reference - https://docs.docker.com/reference/dockerfile/
-* Docker Best Pratices - https://docs.docker.com/build/building/best-practices/
-* Choosing RUN, CMD and ENTRYPOINT - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/
-* CI/CD pipeline - https://github.com/marketplace/actions/docker-build-push-action
-
 ## Se quiser criar imagens locais (buildar)
 ```
 docker build -t samba-dc-fedora --no-cache .
@@ -269,5 +262,12 @@ samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
 samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
 samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 ```
-# Desejando conhecer mais sobre Samba4, acesse a documentação que disponibilizei:
+## Links Úteis pra deploy
+
+* Dockerfile reference - https://docs.docker.com/reference/dockerfile/
+* Docker Best Pratices - https://docs.docker.com/build/building/best-practices/
+* Choosing RUN, CMD and ENTRYPOINT - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/
+* CI/CD pipeline - https://github.com/marketplace/actions/docker-build-push-action
+
+## Desejando conhecer mais sobre Samba4, acesse a documentação que disponibilizei:
 * https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
