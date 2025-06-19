@@ -1,10 +1,14 @@
 FROM fedora:42
 
-# Install necessary packages
+# Instala pacotes necessários
 RUN <<EOF
+# Atualiza pacotes
 dnf -y upgrade --refresh
+# Pacotes necessários
 dnf install -y samba samba-dc samba-client krb5-workstation
+# Pacotes extras
 dnf install -y net-tools htop ccze duf hostname nmap
+# Remove arquivos preparando o ambiente
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
 
@@ -12,7 +16,7 @@ EOF
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Define volumes
+# Define volumes a serem pesistidos
 VOLUME /etc/samba /var/lib/samba /var/log/samba
 
 # Expondo portas

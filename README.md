@@ -55,20 +55,25 @@ git clone https://github.com/Tiozao-do-Linux/samba4-addc.git
 
 # entrar no diretório
 cd samba4-addc
+cp .env.example .env
+
 ```
 
 ### Configurar o seu domínio e senha do Active Directory
 
-* Por default, o arquivo .env contém algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
+* Por default, o arquivo .env.example contém algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
 * Personalize suas informações de acordo com a Wiki abaixo
 	* https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
 ```
 _REALM="SEUDOMINIO.COM.BR"
 _SYSVOL="seudominio.com.br"
 _DOMAIN="SEUDOMINIO"
-_PASSWORD="SuperSecretPassword@2024"
+_PASSWORD="SuperSecretPassword@2025"
 _NETBIOS="dc01"
-_TEMP_PASSWORD="TempSuperSecretPassword@2024"
+_TEMP_PASSWORD="TempSuperSecretPassword@2025"
+_DNS_FORWARDER_1="1.1.1.1"
+_DNS_FORWARDER_2="8.8.8.8"
+_DNS_BACKEND="SAMBA_INTERNAL"
 ```
 
 ### Executar o container (deploy) fedora ( Recomendado por ser mais atualizado )
@@ -146,7 +151,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 
 ## Se quiser criar imagens locais (buildar)
 ```
-docker build -t samba-dc-fedora --no-cache fedora
+docker build -t samba-dc-fedora --no-cache .
 docker build -t samba-dc-debian --no-cache debian
 docker build -t samba-dc-ubuntu --no-cache ubuntu
 ```

@@ -10,21 +10,21 @@ if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
     cat << '_EOF'
  ____________________________________________________________________________
 /\                                                                           \
-\_|                       Active Directory com Samba4                        |
-  |                                                                          |
+\_|                 Active Directory Domain Controler - ADDC                 |
+  |                         Fedora Linux com Samba4                          |
   |   _______________________________________________________________________|_
-   \_/_________________________________________________________________________/   
+   \_/_________________________________________________________________________/
 
 _EOF
     sleep 5
     samba-tool domain provision \
         --server-role=dc \
-        --realm=${_REALM} \
+        --realm=${_REALM:=SEUDOMINIO.COM.BR} \
         --use-rfc2307 \
-        --domain=${_DOMAIN} \
-        --adminpass=${_PASSWORD} \
-        --dns-backend=SAMBA_INTERNAL \
-        --option="dns forwarder = 1.1.1.1 8.8.8.8" \
+        --domain=${_DOMAIN:-SEUDOMINIO} \
+        --adminpass=${_PASSWORD:-SuperSecretPassword@2025} \
+        --dns-backend=${_DNS_BACKEND:-SAMBA_INTERNAL \
+        --option="dns forwarder = ${_DNS_FORWARDER_1:-1.1.1.1} ${_DNS_FORWARDER_2:-8.8.8.8}" \
         --option="template shell = /bin/bash" \
         --option="ad dc functional level = 2016" \
         --function-level=2016 \
