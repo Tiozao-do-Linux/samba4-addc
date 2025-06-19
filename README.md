@@ -252,6 +252,21 @@ samba-tool user setpassword tiozao --newpassword=${_PASSWORD}
 # Listando todos usuários do domínio
 samba-tool user list
 ```
+## Visualiando Graficamente o LDAP
+
+> [!TIP]
+> Uma das formas de se visualizar o LDAP sem ter que acessar o container é instalar o Apache Directory Studio (https://directory.apache.org/studio/) que é um excelente **BROWSER** de LDAP.
+> 
+> No Windows é super simples de instalar (next, next, finish).
+> 
+> No Linux Desktop é mais fácil ainda, tem no **Gerenciador de Pacotes** a versão Flatpack(Flathub).
+
+### Configuração e Visualização
+![Apache-Directory-Studio-Connection-Netwok](screenshots/Apache-Directory-Studio-Connection-Netwok.png)
+
+![Apache-Directory-Studio-Connection-Authentication](screenshots/Apache-Directory-Studio-Connection-Authentication.png)
+
+![Apache-Directory-Studio-Usuario-Tiozao](screenshots/Apache-Directory-Studio-Usuario-Tiozao.png)
 
 ## Remover TUDO do seu ambiente
 
@@ -272,13 +287,16 @@ docker volume rm $( docker volume ls -q | grep samba )
 
 ```bash
 docker build -t samba-dc-fedora --no-cache .
+
 docker build -t samba-dc-debian --no-cache debian
+
 docker build -t samba-dc-ubuntu --no-cache ubuntu
 ```
 
 ## Listar imagens criadas localmente
 ```bash
 docker images
+
 REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
 samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
 samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
