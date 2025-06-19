@@ -49,19 +49,27 @@ Vamos analisar algumas das suas opções:
 
 ## 🚀 Como rodar?
 
+> [!NOTE]
+> Um git clone básicão
+
 ### Clonar o repositório
-```
+
+```bash
 git clone https://github.com/Tiozao-do-Linux/samba4-addc.git
 
 # entrar no diretório
 cd samba4-addc
+
+# copiar o arquivo .env.example para .env
 cp .env.example .env
 ```
 
 ### Configurar o seu domínio e senha do Active Directory
 
-* Por default, o arquivo .env.example contém algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
-```
+> [!TIP]
+> O arquivo `.env.example` contém algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
+
+```bash
 _REALM="SEUDOMINIO.COM.BR"
 _SYSVOL="seudominio.com.br"
 _DOMAIN="SEUDOMINIO"
@@ -73,30 +81,39 @@ _DNS_FORWARDER_2="8.8.8.8"
 _DNS_BACKEND="SAMBA_INTERNAL"
 ```
 
-### Executar o container (deploy) fedora ( Recomendado por ser mais atualizado )
-```
+### Executar o container (deploy) fedora
+
+> [!TIP]
+> Recomendado por ter o samba mais atualizado
+
+```bash
 docker compose up -d
 ```
 
 ### Ver logs
-```
+```bash
 docker compose logs -f
 ```
 
 ### Listar os containers em execução
-```
+```bash
 docker ps
+
 CONTAINER ID   IMAGE                          COMMAND            CREATED         STATUS                PORTS      NAMES
 13b91ad25746   jarbelix/samba4-addc-fedora    "/entrypoint.sh"   5 minutes ago   Up 5 minutes                     samba4-ad
 ```
 
 ### Listar os volumes
-```
+```bash
 docker volume ls | grep samba
 ```
 
-### Entrar no container (note que o prompt muda para [root@dc01 /])
-```
+### Entrar no container
+
+> [!TIP]
+> Note que o prompt muda para **[root@dc01 /]**
+
+```bash
 docker exec -it samba4-ad bash
 
 [root@dc01 /]# cat /etc/samba/smb.conf
@@ -145,8 +162,10 @@ Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 
 ## Configurações do domínio (opcional)
 
-* Tenha certeza que está dentro do container visualizando o prompt `[root@dc01 /]`
-```
+> [!TIP]
+> Tenha certeza que está dentro do container visualizando o prompt `[root@dc01 /]`
+
+```bash
 # Não expirar senha do Administrador
 samba-tool user setexpiry Administrator --noexpiry
 
@@ -236,8 +255,10 @@ samba-tool user list
 
 ## Remover TUDO do seu ambiente
 
-Se algo deu errado e não funcionou como esperado e quiser remover o container, imagem e volumes de seu ambiente local
-```
+> [!WARNING]
+> Se algo deu errado e não funcionou como esperado e quiser remover o container, imagem e volumes de seu ambiente local
+
+```bash
 docker stop samba4-ad
 docker rm samba4-ad
 docker rmi jarbelix/samba4-addc-fedora
@@ -248,20 +269,22 @@ docker volume rm $( docker volume ls -q | grep samba )
 * https://hub.docker.com/u/jarbelix
 
 ## Se quiser criar imagens locais (buildar)
-```
+
+```bash
 docker build -t samba-dc-fedora --no-cache .
 docker build -t samba-dc-debian --no-cache debian
 docker build -t samba-dc-ubuntu --no-cache ubuntu
 ```
 
 ## Listar imagens criadas localmente
-```
+```bash
 docker images
 REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
 samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
 samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
 samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 ```
+
 ## Links Úteis pra deploy
 
 * Dockerfile reference - https://docs.docker.com/reference/dockerfile/
@@ -271,3 +294,4 @@ samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 
 ## Desejando conhecer mais sobre Samba4, acesse a documentação que disponibilizei:
 * https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
+
