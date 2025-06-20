@@ -17,10 +17,9 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Define volumes a serem pesistidos
-VOLUME /etc/samba /var/lib/samba /var/log/samba
+VOLUME /etc/samba /var/lib/samba /var/log/samba /root/provision
 
 # Expondo portas
-EXPOSE 53/udp 53/tcp 88/tcp 88/udp 135/tcp 139/tcp \
-       389/tcp 389/udp 445/tcp 464/tcp 464/udp 636/tcp 3268/tcp 3269/tcp
+EXPOSE 53/udp 53/tcp 88/tcp 88/udp 135/tcp 139/tcp 389/tcp 389/udp 445/tcp 464/tcp 464/udp 636/tcp 3268/tcp 3269/tcp
 
 ENTRYPOINT ["/entrypoint.sh"]

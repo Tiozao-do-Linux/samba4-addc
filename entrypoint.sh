@@ -6,7 +6,6 @@ SAMBA_LIB_DIR="/var/lib/samba"
 SAMBA_LOG_DIR="/var/log/samba"
 
 if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
-    echo "Provisionando ${_DOMAIN} ..."
     cat << '_EOF'
  ____________________________________________________________________________
 /\                                                                           \
@@ -16,6 +15,7 @@ if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
    \_/_________________________________________________________________________/
 
 _EOF
+    echo "Provisionando ${_DOMAIN} ..."
     sleep 5
     samba-tool domain provision \
         --server-role=dc \
@@ -29,6 +29,13 @@ _EOF
         --option="ad dc functional level = 2016" \
         --function-level=2016 \
         --base-schema=2019
+    
+    # Executar procedimentos após o provisionamento
+    if [ -f /root/provision/post-provision.sh ]; then
+        echo "sh /root/provision/post-provision.sh"
+        cat /root/provision/post-provision.sh
+        sleep 5
+    fi
 fi
 
 # Copiar a configuração gerada para o kerberos
