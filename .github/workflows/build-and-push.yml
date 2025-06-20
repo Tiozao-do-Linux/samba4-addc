@@ -11,6 +11,7 @@ on:
       - '!.github/workflows/**'
       - '!.gitignore'
       - '!README.md'
+      - '!LICENSE'
 
 # Your workflows jobs
 # Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs

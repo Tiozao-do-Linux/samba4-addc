@@ -39,9 +39,11 @@ fi
 # Copiar a configuração gerada para o kerberos
 cp /var/lib/samba/private/krb5.conf /etc/
 
+_DATE_TIME=`date +%4Y/%m/%d-%H:%M:%S`
+
 echo "
 ================================================================================
-Domínio ${_DOMAIN} já provisionado. Iniciando Samba ...
+Domínio ${_DOMAIN} já provisionado. Iniciando Samba em ${_DATE_TIME}
 ================================================================================
 "
 exec samba -i -M single
