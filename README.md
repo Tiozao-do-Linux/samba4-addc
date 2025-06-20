@@ -319,3 +319,13 @@ samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 ## Desejando conhecer mais sobre Samba4, acesse a documentação que disponibilizei:
 * https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
 
+## Outras iniciativas de Samba4 e Docker
+
+Pesquisando na internet sobre, achei algumas outras referências:
+* https://github.com/bodsch/docker-samba4
+* https://github.com/dperson/samba
+* https://github.com/tkaefer/alpine-samba-ad-container
+* https://helgeklein.com/blog/samba-active-directory-in-a-docker-container-installation-guide/
+* https://github.com/instantlinux/docker-tools/tree/main/images/samba-dc (Bem interessante e ativo)
+* https://github.com/diegogslomp/samba-ad-dc (Vários sabores: almalinux, debian, rocklinux, ubuntu)
+
