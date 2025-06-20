@@ -112,7 +112,8 @@ docker exec -it samba4-ad bash
 ```
 
 > [!WARNING]
-> Comando sendo executados **dentro** do container
+> 
+> Quando se fizer necessário executar comandos **dentro** do container
 > 
 > Note que o prompt muda para **`[root@dc01 /]`**
 > 
@@ -164,21 +165,17 @@ Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 ## Configurações do domínio (opcional)
 
 > [!WARNING]
+> O script de pós configuração (**`/provision/post-provision.sh`**) é executado logo após o provisionamento inicial do container.
+>
+> Ficou cuioso? **Faça um cat no referido arquivo.**
+> 
+> Isso permite ajustar as configurações padrões do samba para as suas necessidades, bastando alterar o arquivo antes de iniciar o container.
+> 
+> Veja abaixo um *gostinho* do que é possível fazer via **samba-tool**
+> 
 > Tenha certeza que está dentro do container visualizando o prompt **`[root@dc01 /]`**
 
 ```bash
-# Não expirar senha do Administrador
-samba-tool user setexpiry Administrator --noexpiry
-
-# Alterando Políticas do Domínio
-samba-tool domain passwordsettings set --complexity=on --history-length=3 --min-pwd-age=0 --max-pwd-age=365 --min-pwd-length=8
-
-# Validando politicas do Domínio
-samba-tool domain passwordsettings show
-
-# Validar a versão do esquema do AD em um Samba DC
-samba-tool domain level show
-
 # Criar grupo de usuários
 samba-tool group add 'Turma da Monica' --description "Grupo de Usuários da Turma da Mônica"
 
@@ -236,23 +233,16 @@ samba-tool ou list
 
 samba-tool ou listobjects OU=Financeiro
 
-# Adicionando usuário tiozao ao Domínio
-samba-tool user add tiozao ${_TEMP_PASSWORD} --use-username-as-cn \
---given-name="Tiozão" --surname="do Linux" --job-title="Título do Cargo" \
---company="Nome da Empresa" --department="Nome do Departamento" \
---description="Descrição Opcional" --mail-address=jarbas.junior@gmail.com \
---telephone-number="+55 67 9 81183482" --physical-delivery-office="Endereço Completo" \
---login-shell=/bin/bash
-
 # Listando propriedades de um usuário
-samba-tool user show tiozao
+samba-tool user show monica
 
-# Trocar a senha do usuário tiozao que foi criado como senha ${_TEMP_PASSWORD} para ${_PASSWORD}
-samba-tool user setpassword tiozao --newpassword=${_PASSWORD}
+# Trocar a senha do usuário monica que foi criado com senha aleatória para ${_PASSWORD}
+samba-tool user setpassword monica --newpassword=${_PASSWORD}
 
 # Listando todos usuários do domínio
 samba-tool user list
 ```
+
 ## Visualiando Graficamente o LDAP
 
 > [!TIP]
