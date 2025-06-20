@@ -40,3 +40,7 @@ samba-tool group list
 echo "Listando todos usuários do domínio
 ================================================================================"
 samba-tool user list
+
+echo "Listar o Nível de Função e Floresta para o Domínio
+================================================================================"
+samba-tool domain level show
