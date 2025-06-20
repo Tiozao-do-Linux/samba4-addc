@@ -97,7 +97,7 @@ docker compose logs -f
 
 ### Listar os containers em execução
 ```bash
-docker ps
+docker compose ps
 ```
 
 ### Listar os volumes
