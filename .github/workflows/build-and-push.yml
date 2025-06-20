@@ -6,6 +6,10 @@ name: Workflow para Build e Push
 on:
   push:
     branches: [ main ]
+    paths:
+      - '!.github/workflows/**'
+      - '!.gitignore'
+      - '!README.md'
 
 # Your workflows jobs
 # Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
