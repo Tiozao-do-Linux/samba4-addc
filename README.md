@@ -114,7 +114,7 @@ docker exec -it samba4-ad bash
 > [!WARNING]
 > Comando sendo executados **dentro** do container
 > 
-> Note que o prompt muda para **[root@dc01 /]**
+> Note que o prompt muda para **`[root@dc01 /]`**
 > 
 ```bash
 [root@dc01 /]# cat /etc/samba/smb.conf
@@ -164,7 +164,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 ## Configurações do domínio (opcional)
 
 > [!WARNING]
-> Tenha certeza que está dentro do container visualizando o prompt `[root@dc01 /]`
+> Tenha certeza que está dentro do container visualizando o prompt **`[root@dc01 /]`**
 
 ```bash
 # Não expirar senha do Administrador
