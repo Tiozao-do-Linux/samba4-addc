@@ -5,6 +5,12 @@ SAMBA_CONF_DIR="/etc/samba"
 SAMBA_LIB_DIR="/var/lib/samba"
 SAMBA_LOG_DIR="/var/log/samba"
 
+function echo_line {
+    echo "================================================================================"
+    echo "$@"
+    echo "================================================================================"
+}
+
 if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
     cat << '_EOF'
  ____________________________________________________________________________
@@ -15,7 +21,7 @@ if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
    \_/_________________________________________________________________________/
 
 _EOF
-    echo "Provisionando Domínio ${_DOMAIN} com REALM ${_REALM} ..."
+    echo_line "Provisionando Domínio ${_DOMAIN} com REALM ${_REALM} ..."
     sleep 5
     samba-tool domain provision \
         --server-role=dc \
@@ -39,11 +45,8 @@ fi
 # Copiar a configuração gerada para o kerberos
 cp /var/lib/samba/private/krb5.conf /etc/
 
-_DATE_TIME=`date +%4Y/%m/%d-%H:%M:%S`
+_DATE_TIME=`date +%4Y/%m/%d-%H:%M:%S%:z`
 
-echo "
-================================================================================
-Domínio ${_DOMAIN} já provisionado. Iniciando Samba em ${_DATE_TIME}
-================================================================================
-"
+echo_line "Domínio ${_DOMAIN} já provisionado. Iniciando Samba em ${_DATE_TIME}..."
+
 exec samba -i -M single
