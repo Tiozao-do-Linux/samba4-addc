@@ -17,11 +17,26 @@ cat << '_EOF'
 '------------------------------------------------------------------------------'
 _EOF
 
-echo "Não expirar senha do Administrador"
+echo "Não expirar senha do Administrador
+================================================================================"
 samba-tool user setexpiry Administrator --noexpiry
 
-echo "Alterando Políticas do Domínio"
+echo "Definindo Políticas de Senhas do Domínio
+================================================================================"
 samba-tool domain passwordsettings set --complexity=on --history-length=3 --min-pwd-age=0 --max-pwd-age=365 --min-pwd-length=8
 
-echo "Validando politicas do Domínio"
+echo "Validando politicas do Domínio
+================================================================================"
 samba-tool domain passwordsettings show
+
+echo "Listando as OUs e Objetos da OU
+================================================================================"
+samba-tool ou list
+
+echo "Listando os Grupos e Membros de Grupos
+================================================================================"
+samba-tool group list
+
+echo "Listando todos usuários do domínio
+================================================================================"
+samba-tool user list
