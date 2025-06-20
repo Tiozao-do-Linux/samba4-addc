@@ -67,12 +67,14 @@ cp .env.example .env
 ### Configurar o seu domínio e senha do Active Directory
 
 > [!TIP]
-> O arquivo `.env.example` contém algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
+> O arquivo `.env` deve conter algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
+> 
+> Exemplo: Veja meu caso onde meu domínio de login é **tiozaodolinux** e meu REALM é **tiozaodolinux.com**. Veja como fica meu **.env** abaixo:
 
 ```bash
-_REALM="SEUDOMINIO.COM.BR"
-_SYSVOL="seudominio.com.br"
-_DOMAIN="SEUDOMINIO"
+_REALM="TIOZAODOLINUX.COM"
+_SYSVOL="tiozaodolinux.com"
+_DOMAIN="TIOZAODOLINUX"
 _PASSWORD="SuperSecretPassword@2025"
 _NETBIOS="dc01"
 _TEMP_PASSWORD="TempSuperSecretPassword@2025"
@@ -81,10 +83,11 @@ _DNS_FORWARDER_2="8.8.8.8"
 _DNS_BACKEND="SAMBA_INTERNAL"
 ```
 
-### Executar o container (deploy) fedora
+### Executar o container (deploy)
 
 > [!TIP]
-> Recomendado por ter o samba mais atualizado
+> 
+> Recomendado o **Fedora** por ter o samba mais atualizado.
 
 ```bash
 docker compose up -d
