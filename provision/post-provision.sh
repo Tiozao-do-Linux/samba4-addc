@@ -17,6 +17,8 @@ cat << '_EOF'
 '------------------------------------------------------------------------------'
 _EOF
 
+sleep 5
+
 echo "Não expirar senha do Administrador
 ================================================================================"
 samba-tool user setexpiry Administrator --noexpiry

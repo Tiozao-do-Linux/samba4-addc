@@ -15,7 +15,7 @@ if [ ! -f "$SAMBA_CONF_DIR/smb.conf" ]; then
    \_/_________________________________________________________________________/
 
 _EOF
-    echo "Provisionando ${_DOMAIN} ..."
+    echo "Provisionando Domínio ${_DOMAIN} com REALM ${_REALM} ..."
     sleep 5
     samba-tool domain provision \
         --server-role=dc \
@@ -33,12 +33,15 @@ _EOF
     # Executar procedimentos após o provisionamento
     if [ -f /root/provision/post-provision.sh ]; then
         /root/provision/post-provision.sh
-        sleep 5
     fi
 fi
 
 # Copiar a configuração gerada para o kerberos
 cp /var/lib/samba/private/krb5.conf /etc/
 
-echo "[INFO] Domínio ${_DOMAIN} já provisionado. Iniciando Samba..."
+echo "
+================================================================================
+Domínio ${_DOMAIN} já provisionado. Iniciando Samba ...
+================================================================================
+"
 exec samba -i -M single
