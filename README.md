@@ -274,10 +274,10 @@ samba-tool user list
 > Se algo deu errado e não funcionou como esperado e quiser remover o container, imagem e volumes de seu ambiente local
 
 ```bash
-docker stop samba4-ad
-docker rm samba4-ad
-docker rmi jarbelix/samba4-addc-fedora
-docker volume rm $( docker volume ls -q | grep samba )
+docker stop samba4-ad; \
+docker rm samba4-ad; \
+docker volume rm $( docker volume ls -q | grep samba ); \
+docker rmi jarbelix/samba4-addc-fedora; 
 ```
 
 ## Hub do Jarbelix

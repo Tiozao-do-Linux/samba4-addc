@@ -57,6 +57,4 @@ if [ "$(ls -1 *.ldif 2>/dev/null | wc -l)" -gt 0 ]; then
         echo "Importando $f"
         ldbadd -H /var/lib/samba/private/sam.ldb $f
     done
-else
-    echo "Nenhum arquivo *ldif* encontrado no diretório"
 fi
