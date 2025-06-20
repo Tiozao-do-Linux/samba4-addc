@@ -14,7 +14,7 @@ EOF
 
 # Copia o entrypoint
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# RUN chmod +x /entrypoint.sh
 
 # Define volumes a serem pesistidos
 VOLUME /etc/samba /var/lib/samba /var/log/samba /root/provision
