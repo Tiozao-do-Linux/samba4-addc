@@ -98,9 +98,6 @@ docker compose logs -f
 ### Listar os containers em execução
 ```bash
 docker ps
-
-CONTAINER ID   IMAGE                          COMMAND            CREATED         STATUS                PORTS      NAMES
-13b91ad25746   jarbelix/samba4-addc-fedora    "/entrypoint.sh"   5 minutes ago   Up 5 minutes                     samba4-ad
 ```
 
 ### Listar os volumes
@@ -110,12 +107,16 @@ docker volume ls | grep samba
 
 ### Entrar no container
 
-> [!TIP]
-> Note que o prompt muda para **[root@dc01 /]**
-
 ```bash
 docker exec -it samba4-ad bash
+```
 
+> [!WARNING]
+> Comando sendo executados **dentro** do container
+> 
+> Note que o prompt muda para **[root@dc01 /]**
+> 
+```bash
 [root@dc01 /]# cat /etc/samba/smb.conf
 # Global parameters
 [global]
@@ -162,7 +163,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 
 ## Configurações do domínio (opcional)
 
-> [!TIP]
+> [!WARNING]
 > Tenha certeza que está dentro do container visualizando o prompt `[root@dc01 /]`
 
 ```bash
