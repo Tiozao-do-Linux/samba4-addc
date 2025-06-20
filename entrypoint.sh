@@ -33,7 +33,6 @@ _EOF
     # Executar procedimentos após o provisionamento
     if [ -f /root/provision/post-provision.sh ]; then
         echo "sh /root/provision/post-provision.sh"
-        cat /root/provision/post-provision.sh
         sleep 5
     fi
 fi
