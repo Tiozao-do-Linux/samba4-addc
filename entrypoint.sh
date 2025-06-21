@@ -33,13 +33,13 @@ _EOF
         --base-schema=2019
     
     # Executar procedimentos após o provisionamento
-    if [ -f "${PROVISION_DIR}/post-provision.sh" ]; then
-        ${PROVISION_DIR}/post-provision.sh
+    if [ -f "${_PROVISION_DIR}/post-provision.sh" ]; then
+        ${_PROVISION_DIR}/post-provision.sh
     fi
 fi
 
 # Copiar a configuração gerada para o kerberos
-cp ${SAMBA_LIB_DIR}/private/krb5.conf /etc/
+cp ${_SAMBA_LIB_DIR}/private/krb5.conf /etc/
 
 _DATE_TIME=`date +%4Y/%m/%d-%H:%M:%S%z`
 

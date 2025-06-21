@@ -47,13 +47,13 @@ samba-tool user list
 echo_line "Listar o Nível de Função e Floresta para o Domínio"
 samba-tool domain level show
 
-cd ${PROVISION_DIR}
+cd ${_PROVISION_DIR}
 
 # Se existir arquivos *ldif* no diretório, executa os procedimentos de carga
 if [ "$(ls -1 *.ldif 2>/dev/null | wc -l)" -gt 0 ]; then
    echo_line "Importando arquivos *ldif* no Domínio"
    for f in *.ldif; do
       echo_line "Importando $f"
-      ldbadd -H ${SAMBA_LIB_DIR}/private/sam.ldb $f
+      ldbadd -H ${_SAMBA_LIB_DIR}/private/sam.ldb $f
    done
 fi
