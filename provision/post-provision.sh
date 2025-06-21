@@ -50,9 +50,9 @@ samba-tool domain level show
 cd ${_PROVISION_DIR}
 
 # Se existir arquivos *ldif* no diretório, executa os procedimentos de carga
-if [ "$(ls -1 *.ldif 2>/dev/null | wc -l)" -gt 0 ]; then
-   echo_line "Importando arquivos *ldif* no Domínio"
-   for f in *.ldif; do
+if [ "$(ls -1 *.${_DOMAIN}.ldif 2>/dev/null | wc -l)" -gt 0 ]; then
+   echo_line "Importando arquivos *ldif no Domínio"
+   for f in *.${_DOMAIN}.ldif; do
       echo_line "Importando $f"
       ldbadd -H ${_SAMBA_LIB_DIR}/private/sam.ldb $f
    done
