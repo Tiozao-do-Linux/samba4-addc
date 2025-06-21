@@ -77,10 +77,10 @@ _SYSVOL="tiozaodolinux.com"
 _DOMAIN="TIOZAODOLINUX"
 _PASSWORD="SuperSecretPassword@2025"
 _NETBIOS="dc01"
-_TEMP_PASSWORD="TempSuperSecretPassword@2025"
 _DNS_FORWARDER_1="1.1.1.1"
 _DNS_FORWARDER_2="8.8.8.8"
 _DNS_BACKEND="SAMBA_INTERNAL"
+_TEMP_PASSWORD="TempSuperSecretPassword@2025"
 ```
 
 ### Executar o container (deploy)
