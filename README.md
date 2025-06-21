@@ -81,6 +81,13 @@ _DNS_FORWARDER_1="1.1.1.1"
 _DNS_FORWARDER_2="8.8.8.8"
 _DNS_BACKEND="SAMBA_INTERNAL"
 _TEMP_PASSWORD="TempSuperSecretPassword@2025"
+
+# Algunas configurações padrão:
+#################################
+_SAMBA_CONF_DIR="/etc/samba"
+_SAMBA_LIB_DIR="/var/lib/samba"
+_SAMBA_LOG_DIR="/var/log/samba"
+_PROVISION_DIR="/root/provision"
 ```
 
 ### Executar o container (deploy)
@@ -245,6 +252,16 @@ samba-tool user setpassword monica --newpassword=${_PASSWORD}
 # Listando todos usuários do domínio
 samba-tool user list
 ```
+
+### Povoando o domínio com usuários fake
+
+> [!IMPORTANT]
+> Após o provisionamento inicial do samba4, o script `**post-provision.sh**` processa os arquivos **ldif** antes de iniciar samba. Isso de forma automática antes de o container terminar de subir.
+> 
+> Deixo de brinde um ldif com 1000 usuários fake para o domínio **SEUDOMINIO**.
+>
+> Não sabe como gerar um ldif personalizado? Então fale comigo que te ensino como fazer.
+> 
 
 ## Visualiando Graficamente o LDAP
 
