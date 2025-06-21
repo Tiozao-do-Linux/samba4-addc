@@ -41,7 +41,7 @@ fi
 # Copiar a configuração gerada para o kerberos
 cp ${_SAMBA_LIB_DIR}/private/krb5.conf /etc/
 
-_DATE_TIME=`date +%4Y/%m/%d-%H:%M:%S%z`
+_DATE_TIME=`date`   #`date +%4Y/%m/%d-%H:%M:%S%z`
 
 echo_line "Domínio ${_DOMAIN} já provisionado. Iniciando em ${_DATE_TIME}..."
 
