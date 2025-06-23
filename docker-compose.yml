@@ -12,6 +12,7 @@ services:
     env_file:
       - .env
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - samba_etc:/etc/samba
       - samba_lib:/var/lib/samba
       - samba_logs:/var/log/samba
