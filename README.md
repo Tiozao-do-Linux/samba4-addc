@@ -333,6 +333,7 @@ samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 ## Outras iniciativas de Samba4 e Docker
 
 Pesquisando na internet sobre, achei algumas outras referências:
+* Uma verdadeira aula - https://helgeklein.com/blog/samba-active-directory-in-a-docker-container-installation-guide/
 * https://github.com/Fmstrat/samba-domain
 * https://github.com/bodsch/docker-samba4
 * https://github.com/dperson/samba
