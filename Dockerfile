@@ -1,5 +1,10 @@
 FROM fedora:42
 
+# Labels
+LABEL description="Active Directory Domain Controller com Samba4"
+LABEL version="1.0"
+LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.com>"
+
 # Instala pacotes necessários
 RUN <<EOF
 # Atualiza pacotes
@@ -14,7 +19,6 @@ EOF
 
 # Copia o entrypoint
 COPY entrypoint.sh /entrypoint.sh
-# RUN chmod +x /entrypoint.sh
 
 # Define volumes a serem pesistidos
 VOLUME /etc/samba /var/lib/samba /var/log/samba /root/provision

@@ -45,7 +45,7 @@ Vamos analisar algumas das suas opções:
 ## 🎯 Conclusão:
 * Se o objetivo é estabilidade, compatibilidade com documentação e menor dor de cabeça, `Debian` é a melhor escolha.
 * Se você já está mais confortável com `Ubuntu`, especialmente em servidores, ele também é uma ótima base.
-* Use `Fedora` apenas se você precisa testar recursos muito recentes do Samba.
+* Se precisa das últimos recursos (level 2019) do samba4 use `Fedora` .
 
 ## 🚀 Como rodar?
 
@@ -256,7 +256,7 @@ samba-tool user list
 ### Povoando o domínio com usuários fake
 
 > [!IMPORTANT]
-> Após o provisionamento inicial do samba4, o script `**post-provision.sh**` processa os arquivos **ldif** antes de iniciar samba. Isso de forma automática antes de o container terminar de subir.
+> Após o provisionamento inicial do samba4, o script **`post-provision.sh`** processa os arquivos **ldif** antes de iniciar samba. Isso de forma automática antes de o container terminar de subir.
 > 
 > Deixo de brinde um ldif com 1000 usuários fake para o domínio **SEUDOMINIO**.
 >
