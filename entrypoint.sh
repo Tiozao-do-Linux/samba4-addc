@@ -21,7 +21,7 @@ _EOF
     sleep 5
     samba-tool domain provision \
         --server-role=dc \
-        --realm=${_REALM:=SEUDOMINIO.COM.BR} \
+        --realm=${_REALM:-SEUDOMINIO.COM.BR} \
         --use-rfc2307 \
         --domain=${_DOMAIN:-SEUDOMINIO} \
         --adminpass=${_PASSWORD:-SuperSecretPassword@2025} \
