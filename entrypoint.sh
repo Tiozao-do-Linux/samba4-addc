@@ -29,7 +29,7 @@ _EOF
         --option="dns forwarder = ${_DNS_FORWARDER_1:-1.1.1.1} ${_DNS_FORWARDER_2:-8.8.8.8}" \
         --option="template shell = /bin/bash" \
         --option="ad dc functional level = 2016" \
-        --option="log level = 1 auth_json_audit:3" \
+        --option="log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5" \
         --function-level=2016 \
         --base-schema=2019
     
