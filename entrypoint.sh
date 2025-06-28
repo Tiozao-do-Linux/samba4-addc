@@ -29,7 +29,7 @@ _EOF
         --option="dns forwarder = ${_DNS_FORWARDER_1:-1.1.1.1} ${_DNS_FORWARDER_2:-8.8.8.8}" \
         --option="template shell = /bin/bash" \
         --option="ad dc functional level = 2016" \
-        --option="log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5" \
+        --option="log level = 0" \
         --function-level=2016 \
         --base-schema=2019
     
@@ -45,5 +45,8 @@ cp ${_SAMBA_LIB_DIR}/private/krb5.conf /etc/
 _DATE_TIME=`date`   #`date +%4Y/%m/%d-%H:%M:%S%z`
 
 echo_line "Domínio ${_DOMAIN} já provisionado. Iniciando em ${_DATE_TIME}..."
+
+# Configurar o log level do servidor
+sed -i "s/log level = 0/log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5/g" ${_SAMBA_CONF_DIR}/smb.conf
 
 exec samba -i -M single
