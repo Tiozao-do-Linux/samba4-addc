@@ -47,7 +47,7 @@ jobs:
 
       - name: Executar commandos linux
         run: |
-          AGORA=`date +%Y/%m/%d-%H:%M:%S`
+          AGORA=`date -u +'%Y-%m-%dT%H:%M:%S%Z'`
           echo "date ===> $AGORA"
           echo "======================================================"
           cat /etc/os-release
