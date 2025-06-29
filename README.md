@@ -328,6 +328,7 @@ samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 * Dockerfile reference - https://docs.docker.com/reference/dockerfile/
 * Docker Best Pratices - https://docs.docker.com/build/building/best-practices/
 * Choosing RUN, CMD and ENTRYPOINT - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/
+* Using Tags and Labels to Manage Docker Image Sprawl - https://www.docker.com/blog/docker-best-practices-using-tags-and-labels-to-manage-docker-image-sprawl/
 * CI/CD pipeline - https://github.com/marketplace/actions/docker-build-push-action
 
 ## Desejando conhecer mais sobre Samba4, acesse a documentação que disponibilizei:
