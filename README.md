@@ -22,6 +22,7 @@ Vamos analisar algumas das suas opções:
     * Tamanho da imagem debian:bullseye-slim ou bookworm-slim é relativamente enxuto.
 * Contras:
     * Alguns pacotes podem estar um pouco desatualizados em relação ao upstream (embora normalmente estáveis para uso em produção).
+    * Version **4.17.12-Debian**
 
 ## ✅ 2. Ubuntu
 * Prós:
@@ -31,11 +32,13 @@ Vamos analisar algumas das suas opções:
 * Contras:
     * A imagem é um pouco maior que a do Debian.
     * Pode ter mais camadas de complexidade em relação ao systemd, dependendo do que você precisa rodar.
+    * Version **4.15.13-Ubuntu**
 
 ## ✅ 3. Fedora 42  (recomendado)
 * Prós:
-    * Costuma estar mais atualizado (mais próximo do upstream). Hoje, 18/Jun/2025 a versão do samba instalada é 4.22.2 que corresponde com a última release oficial.
+    * Costuma estar mais atualizado (mais próximo do upstream).
     * Bom para testes ou ambientes onde se quer explorar funcionalidades recentes.
+    * Version **4.22.2**
 * Contras:
     * Fedora não é tão comum em servidores de produção.
     * Atualizações frequentes (ciclo de vida mais curto), embora possa ser atualizado entre versões facilmente
