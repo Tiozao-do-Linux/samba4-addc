@@ -1,0 +1,68 @@
+name: Workflow para Build e Push Multi Plataforma
+# Reference: https://docs.docker.com/build/ci/github-actions/multi-platform/
+
+# Run workflow on every push to main branch
+# Reference: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**'
+      - '!.github/workflows/**'
+      - '!.gitignore'
+      - '!README.md'
+      - '!LICENSE'
+
+# Your workflows jobs
+# Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
+jobs:
+
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      - name: Login no Docker Hub
+        run: docker login ${{ vars.DOCKER_REGISTRY }} -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      # - name: Logout do Docker Hub
+      #   run: docker logout ${{ vars.DOCKER_REGISTRY }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Checkout do repositório de código
+        uses: actions/checkout@v4
+
+      - name: Listar arquivos
+        run: |
+          ls -lat
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: jarbelix/samba4-addc-fedora:latest, jarbelix/samba4-addc-fedora:v1
+
+      # - name: Build & push Docker - linux/amd64
+      #   uses: mr-smithers-excellent/docker-build-push@v6
+      #   with:
+      #       image: jarbelix/samba4-addc-fedora
+      #       tags: v1,latest
+      #       dockerfile: Dockerfile
+      #       registry: ${{ vars.DOCKER_REGISTRY }}
+      #       username: ${{ vars.DOCKER_USERNAME }}
+      #       password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Executar commandos linux
+        run: |
+          AGORA=`date -u +'%Y-%m-%dT%H:%M:%S%Z'`
+          echo "date ===> $AGORA"
+          echo "======================================================"
+          cat /etc/os-release
+          echo "======================================================"
+          docker images
