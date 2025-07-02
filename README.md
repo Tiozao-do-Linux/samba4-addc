@@ -19,10 +19,13 @@ Vamos analisar algumas das suas opções:
     * Samba é bem suportado no Debian, com pacotes atualizados.
     * Documentação da comunidade Samba costuma ter exemplos com Debian.
     * Estável, previsível e amplamente utilizado em ambientes de produção.
-    * Tamanho da imagem debian:bullseye-slim ou bookworm-slim é relativamente enxuto.
+    * Tamanho da imagem debian:bookworm-slim é relativamente enxuto.
 * Contras:
     * Alguns pacotes podem estar um pouco desatualizados em relação ao upstream (embora normalmente estáveis para uso em produção).
     * Version **4.17.12-Debian**
+* Alternativa:
+    * Utilizar a imagem *debian:bookworm-backports* que possui a versão samba mais atualizada.
+    * Version **4.22.2-Debian-4.22.2+dfsg-1~bpo12+1**
 
 ## ✅ 2. Ubuntu
 * Prós:
