@@ -6,12 +6,12 @@ name: Workflow para Build e Push Multi Plataforma
 on:
   push:
     branches: [ main ]
-    paths:
-      - '**'
-      - '!.github/workflows/**'
-      - '!.gitignore'
-      - '!README.md'
-      - '!LICENSE'
+    # paths:
+    #   - '**'
+    #   - '!.github/workflows/**'
+    #   - '!.gitignore'
+    #   - '!README.md'
+    #   - '!LICENSE'
 
 # Your workflows jobs
 # Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
@@ -19,7 +19,15 @@ jobs:
 
   build-and-push:
     runs-on: ubuntu-latest
-    
+
+    strategy:
+      fail-fast: false
+      matrix:
+        dockerfile: [ ./Dockerfile, ./debian/Dockerfile, ./ubuntu/Dockerfile]
+        platform: [linux/amd64, linux/arm64]
+        image: [jarbelix/samba4-addc-fedora, jarbelix/samba4-addc-debian, jarbelix/samba4-addc-ubuntu]
+        tags: [latest, v1]
+
     steps:
 
       - name: Login no Docker Hub
@@ -45,6 +53,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          platforms: linux/amd64,linux/arm64
+          context: .
+          file: ${{ matrix.dockerfile }}
+          tags: ${{ matrix.image }}:${{ matrix.tags }}
+          platforms: ${{ matrix.platform }}
           push: true
-          tags: jarbelix/samba4-addc-fedora:latest, jarbelix/samba4-addc-fedora:v1
