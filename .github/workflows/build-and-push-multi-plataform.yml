@@ -24,9 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         dockerfile: [ ./Dockerfile, ./debian/Dockerfile, ./ubuntu/Dockerfile]
-        platform: [linux/amd64, linux/arm64]
         image: [jarbelix/samba4-addc-fedora, jarbelix/samba4-addc-debian, jarbelix/samba4-addc-ubuntu]
-        tags: [latest, v1]
 
     steps:
 
@@ -55,6 +53,6 @@ jobs:
         with:
           context: .
           file: ${{ matrix.dockerfile }}
-          tags: ${{ matrix.image }}:${{ matrix.tags }}
-          platforms: ${{ matrix.platform }}
+          tags: ${{ matrix.image }}:latest
+          platforms: linux/amd64, linux/arm64
           push: true
