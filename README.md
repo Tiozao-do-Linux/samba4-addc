@@ -66,8 +66,8 @@ git clone https://github.com/Tiozao-do-Linux/samba4-addc.git
 # entrar no diretório
 cd samba4-addc
 
-# copiar o arquivo .env.example para .env
-cp .env.example .env
+# copiar o arquivo env.example para .env
+cp env.example .env
 ```
 
 ### Configurar o seu domínio e senha do Active Directory
