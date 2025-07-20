@@ -18,7 +18,7 @@ cat << '_EOF'
 .-----------------------{     }--|  /,.-'-.,\  |--{     }----------------------.
  )                      (_)_)_)  \_/`~-===-~`\_/  (_(_(_)                     (
 (                                                                              )
- )                    Comandos Depois do Provision Inicial                    (
+ )                      Commands After Initial Provision                      (
 (                                                                              )
  )                                                                            (
 '------------------------------------------------------------------------------'
@@ -26,34 +26,34 @@ _EOF
 
 sleep 5
 
-echo_line "Não expirar senha do Administrador"
+echo_line "Do not expire Administrator password"
 samba-tool user setexpiry Administrator --noexpiry
 
-echo_line "Definindo Políticas de Senhas do Domínio"
+echo_line "Setting Domain Password Policies"
 samba-tool domain passwordsettings set --complexity=on --history-length=3 --min-pwd-age=0 --max-pwd-age=365 --min-pwd-length=8
 
-echo_line "Validando politicas do Domínio"
+echo_line "Viewing Domain Password Policies"
 samba-tool domain passwordsettings show
 
-echo_line "Listando as OUs e Objetos da OU"
+echo_line "Listing OUs and OU Objects"
 samba-tool ou list
 
-echo_line "Listando os Grupos e Membros de Grupos"
+echo_line "Listing Groups and Group Members"
 samba-tool group list
 
-echo_line "Listando todos usuários do domínio"
+echo_line "Listing all domain users"
 samba-tool user list
 
-echo_line "Listar o Nível de Função e Floresta para o Domínio"
+echo_line "List the Function and Forest Level for the Domain"
 samba-tool domain level show
 
 cd ${_PROVISION_DIR}
 
-# Se existir arquivos *ldif* no diretório, executa os procedimentos de carga
+# If there are *ldif* files in the directory, perform the load procedures
 if [ "$(ls -1 *.${_DOMAIN}.ldif 2>/dev/null | wc -l)" -gt 0 ]; then
-   echo_line "Importando arquivos *ldif no Domínio"
+   echo_line "Importing *ldif files into the Domain"
    for f in *.${_DOMAIN}.ldif; do
-      echo_line "Importando $f"
+      echo_line "Importing $f"
       ldbadd -H ${_SAMBA_LIB_DIR}/private/sam.ldb $f
    done
 fi

@@ -1,81 +1,76 @@
-# Active Directory Domain Controller com Samba4.
+# Active Directory Domain Controller cwith Samba4.
 ```
  ____________________________________________________________________________
 /\                                                                           \
 \_|                 Active Directory Domain Controler - ADDC                 |
-  |                             Linux com Samba4                             |
+  |                             Linux with Samba4                            |
   |   _______________________________________________________________________|_
    \_/_________________________________________________________________________/
 
 ```
-Tá em dúvida se deve utilizar como base uma imagem do Ubuntu ou do Debian ou do Fedora 42
+To create a Docker image with Samba4 acting as an Active Directory Domain Controller (AD DC), the choice of base image directly influences the ease of installation, community support, and image maintenance.
 
-Para criar uma imagem Docker com Samba4 atuando como um Active Directory Domain Controller (AD DC), a escolha da imagem base influencia diretamente na facilidade de instalação, suporte da comunidade e manutenção da imagem.
-
-Vamos analisar algumas das suas opções:
+Let's look at some options and their pros and cons:
 
 ## ✅ 1. Debian
-* Prós:
-    * Samba é bem suportado no Debian, com pacotes atualizados.
-    * Documentação da comunidade Samba costuma ter exemplos com Debian.
-    * Estável, previsível e amplamente utilizado em ambientes de produção.
-    * Tamanho da imagem debian:bookworm-slim é relativamente enxuto.
-* Contras:
-    * Alguns pacotes podem estar um pouco desatualizados em relação ao upstream (embora normalmente estáveis para uso em produção).
+* Pros:
+    * Samba is well supported on Debian, with up-to-date packages.
+    * Samba community documentation often has examples for Debian.
+    * Stable, predictable, and widely used in production environments.
+    * The *debian:bookworm-slim* image size is relatively small.
+* Cons:
+    * Some packages may be slightly out of date compared to upstream
     * Version **4.17.12-Debian**
-* Alternativa:
-    * Utilizar a imagem *debian:bookworm-backports* que possui a versão samba mais atualizada.
+* Alternative:
+    * Use the *debian:bookworm-backports* image which has the most up-to-date samba version.
     * Version **4.22.2-Debian-4.22.2+dfsg-1~bpo12+1**
 
 ## ✅ 2. Ubuntu
-* Prós:
-    * Baseado no Debian, com pacotes mais recentes em versões LTS.
-    * Boa documentação e comunidade ativa.
-    * Versão ubuntu:20.04 ou 22.04 LTS é uma excelente base estável.
-* Contras:
-    * A imagem é um pouco maior que a do Debian.
-    * Pode ter mais camadas de complexidade em relação ao systemd, dependendo do que você precisa rodar.
+* Pros:
+    * Based on Debian, with generally newer packages in LTS versions.
+    * Good documentation and an active community.
+    * Ubuntu version: 20.04 or 22.04 LTS is an excellent stable base.
+* Cons:
+    * The image is slightly larger than the Debian one.
+    * May have more layers of complexity than systemd, depending on what you need to run.
     * Version **4.15.13-Ubuntu**
 
-## ✅ 3. Fedora 42  (recomendado)
-* Prós:
-    * Costuma estar mais atualizado (mais próximo do upstream).
-    * Bom para testes ou ambientes onde se quer explorar funcionalidades recentes.
+## ✅ 3. Fedora 42 (recomended)
+* Pros:
+    * Usually more up-to-date (closer to upstream).
+    * Good for testing or environments where you want to explore recent features.
     * Version **4.22.2**
-* Contras:
-    * Fedora não é tão comum em servidores de produção.
-    * Atualizações frequentes (ciclo de vida mais curto), embora possa ser atualizado entre versões facilmente
-    * Pode ser mais difícil encontrar tutoriais ou exemplos prontos focados nesse uso.
-    * Imagem maior e mais “pesada” para builds.
+* Cons:
+    * Fedora isn't as common on production servers.
+    * Frequent updates (shorter lifecycle)
+    * It may be harder to find tutorials or ready-made examples focused on this use case.
+    * Larger and heavier image for builds.
 
-## 🎯 Conclusão:
-* Se o objetivo é estabilidade, compatibilidade com documentação e menor dor de cabeça, `Debian` é a melhor escolha.
-* Se você já está mais confortável com `Ubuntu`, especialmente em servidores, ele também é uma ótima base.
-* Se precisa das últimos recursos (level 2019) do samba4 use `Fedora` .
+## 🎯 Conclusion:
+    * If your goal is stability, documentation compatibility, and fewer headaches, `Debian` is the best choice.
+    * If you're already more comfortable with `Ubuntu`, especially on servers, it's also a great base.
+    * If you need the latest features (2019 level) of Samba4, use `Fedora`.
 
-## 🚀 Como rodar?
+## 🚀 How to run?
 
-> [!NOTE]
-> Um git clone básicão
-
-### Clonar o repositório
+### Clone the repository
 
 ```bash
 git clone https://github.com/Tiozao-do-Linux/samba4-addc.git
 
-# entrar no diretório
+# enter the directory
 cd samba4-addc
 
-# copiar o arquivo env.example para .env
+# copy the env.example file to .env
 cp env.example .env
 ```
 
-### Configurar o seu domínio e senha do Active Directory
+### Configure your Active Directory domain and password
 
 > [!TIP]
-> O arquivo `.env` deve conter algumas variáveis básicas que podem ser alteradas de acordo com suas necessidades.
+> The `.env` file should contain some basic variables that can be changed according to your needs.
 > 
-> Exemplo: Veja meu caso onde meu domínio de login é **tiozaodolinux** e meu REALM é **tiozaodolinux.com**. Veja como fica meu **.env** abaixo:
+> Example: See my case where my login domain is **tiozaodolinux** and my REALM is **tiozaodolinux.com**. See what my **.env** looks like below:
 
 ```bash
 _REALM="TIOZAODOLINUX.COM"
@@ -96,32 +91,28 @@ _SAMBA_LOG_DIR="/var/log/samba"
 _PROVISION_DIR="/root/provision"
 ```
 
-### Executar o container (deploy)
-
-> [!TIP]
-> 
-> Recomendado o **Fedora** por ter o samba mais atualizado.
+### Run the container
 
 ```bash
 docker compose up -d
 ```
 
-### Ver logs
+### See the logs
 ```bash
 docker compose logs -f
 ```
 
-### Listar os containers em execução
+### List running containers
 ```bash
 docker compose ps
 ```
 
-### Listar os volumes
+### List samba related volumes
 ```bash
 docker volume ls | grep samba
 ```
 
-### Entrar no container
+### Accessing the container shell
 
 ```bash
 docker exec -it samba4-ad bash
@@ -129,9 +120,9 @@ docker exec -it samba4-ad bash
 
 > [!WARNING]
 > 
-> Quando se fizer necessário executar comandos **dentro** do container
+> When it is necessary to execute commands **inside** the container
 > 
-> Note que o prompt muda para **`[root@dc01 /]`**
+> Note that the prompt changes to **`[root@dc01 /]`**
 > 
 ```bash
 [root@dc01 /]# cat /etc/samba/smb.conf
@@ -178,123 +169,36 @@ PORT      STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 ```
 
-## Configurações do domínio (opcional)
-
-> [!WARNING]
-> O script de pós configuração (**`/provision/post-provision.sh`**) é executado logo após o provisionamento inicial do container.
->
-> Ficou cuioso? **Faça um cat no referido arquivo.**
-> 
-> Isso permite ajustar as configurações padrões do samba para as suas necessidades, bastando alterar o arquivo antes de iniciar o container.
-> 
-> Veja abaixo um *gostinho* do que é possível fazer via **samba-tool**
-> 
-> Tenha certeza que está dentro do container visualizando o prompt **`[root@dc01 /]`**
-
-```bash
-# Criar grupo de usuários
-samba-tool group add 'Turma da Monica' --description "Grupo de Usuários da Turma da Mônica"
-
-# Criando OUs
-samba-tool ou add 'OU=Presidente'
-samba-tool ou add 'OU=Financeiro'
-samba-tool ou add 'OU=RH'
-samba-tool ou add 'OU=TI'
-samba-tool ou add 'OU=Contabil'
-samba-tool ou add 'OU=Producao'
-samba-tool ou add 'OU=Comercial'
-samba-tool ou add 'OU=Logistica'
-
-# Criando os usuários em suas OUs
-samba-tool user add seu.cebola          --random-password --use-username-as-cn --userou='OU=Presidente'
-
-samba-tool user add cebolinha           --random-password --use-username-as-cn --userou='OU=Financeiro'
-samba-tool user add anjinho             --random-password --use-username-as-cn --userou='OU=Financeiro'
-
-samba-tool user add monica              --random-password --use-username-as-cn --userou='OU=RH'
-samba-tool user add dudu                --random-password --use-username-as-cn --userou='OU=RH'
-samba-tool user add rolo                --random-password --use-username-as-cn --userou='OU=RH'
-
-samba-tool user add xaveco              --random-password --use-username-as-cn --userou='OU=TI'
-samba-tool user add horacio             --random-password --use-username-as-cn --userou='OU=TI'
-samba-tool user add marina              --random-password --use-username-as-cn --userou='OU=TI'
-
-samba-tool user add cascao              --random-password --use-username-as-cn --userou='OU=Contabil'
-samba-tool user add ze.vampir           --random-password --use-username-as-cn --userou='OU=Contabil'
-
-samba-tool user add magali              --random-password --use-username-as-cn --userou='OU=Producao'
-samba-tool user add rosinha             --random-password --use-username-as-cn --userou='OU=Producao'
-samba-tool user add carminha.frufru     --random-password --use-username-as-cn --userou='OU=Producao'
-
-samba-tool user add chico.bento         --random-password --use-username-as-cn --userou='OU=Comercial'
-samba-tool user add capitao.feio        --random-password --use-username-as-cn --userou='OU=Comercial'
-samba-tool user add piteco              --random-password --use-username-as-cn --userou='OU=Comercial'
-
-samba-tool user add franjinha           --random-password --use-username-as-cn --userou='OU=Logistica'
-samba-tool user add rita.najura         --random-password --use-username-as-cn --userou='OU=Logistica'
-samba-tool user add juca                --random-password --use-username-as-cn --userou='OU=Logistica'
-
-# Adicionando usuários aos Grupos
-samba-tool group addmembers 'Turma da Monica' monica,cebolinha,cascao,magali
-
-samba-tool group addmembers 'Turma da Monica' seu.cebola,anjinho,dudu,rolo,xaveco,horacio,marina,ze.vampir,rosinha,carminha.frufru,chico.bento,capitao.feio,piteco,franjinha,rita.najura,juca
-
-# Listando os Grupos e Membros de Grupos
-samba-tool group list
-
-samba-tool group listmembers 'Turma da Monica'
-
-# Listando as OUs e Objetos da OU
-samba-tool ou list
-
-samba-tool ou listobjects OU=Financeiro
-
-# Listando propriedades de um usuário
-samba-tool user show monica
-
-# Trocar a senha do usuário monica que foi criado com senha aleatória para ${_PASSWORD}
-samba-tool user setpassword monica --newpassword=${_PASSWORD}
-
-# Listando todos usuários do domínio
-samba-tool user list
-```
-
-### Povoando o domínio com usuários fake
+### Populating the domain with fake users
 
 > [!IMPORTANT]
-> Após o provisionamento inicial do samba4, o script **`post-provision.sh`** processa os arquivos **ldif** antes de iniciar samba. Isso de forma automática antes de o container terminar de subir.
+> After the initial samba4 provisioning, the **`post-provision.sh`** script processes the **ldif** files before starting samba. This automatically happens before the container finishes starting.
 > 
-> Deixo de brinde um ldif com 1000 usuários fake para o domínio **SEUDOMINIO**.
+> I'm leaving as a gift an ldif with 1000 fake users for the domain **SEUDOMINIO**.
 >
-> Não sabe como gerar um ldif personalizado? Então fale comigo que te ensino como fazer.
-> 
+> Don't know how to generate a custom LDIF?
+
+> See this article I wrote on my wiki: https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Docker
+
 
 ## Visualiando Graficamente o LDAP
 
 > [!TIP]
-> Uma das formas de se visualizar o LDAP sem ter que acessar o container é instalar o Apache Directory Studio (https://directory.apache.org/studio/) que é um excelente **BROWSER** de LDAP.
+> One way to view LDAP without having to access the container is to install Apache Directory Studio (https://directory.apache.org/studio/) which is an excellent LDAP BROWSER
 > 
-> No Windows é super simples de instalar (next, next, finish).
+> Browser LDAP Apache Directory Studio via flatpak - https://flathub.org/apps/org.apache.directory.studio
 > 
-> No Linux Desktop é mais fácil ainda, tem no **Gerenciador de Pacotes** a versão Flatpack(Flathub).
-> 
-> ### Configuração e Visualização
+> ### Configuration and Visualization
 > ![Apache-Directory-Studio-Connection-Netwok](screenshots/Apache-Directory-Studio-Connection-Netwok.png)
 > 
 > ![Apache-Directory-Studio-Connection-Authentication](screenshots/Apache-Directory-Studio-Connection-Authentication.png)
 > 
 > ![Apache-Directory-Studio-Usuario-Tiozao](screenshots/Apache-Directory-Studio-Usuario-Tiozao.png)
 
-> [!TIP]
-> Uma outra forma de visualizar o LDAP é através do **LDAP Admin** disponível no site (http://www.ldapadmin.org/) que aparentemente está abandonado desde 2012, mas ainda está disponível no https://sourceforge.net/projects/ldapadmin/
-> 
-> ![LDAP-Admin](screenshots/appwin.jpg)
-
-
-## Remover TUDO do seu ambiente
+## Remove everything from your environment
 
 > [!WARNING]
-> Se algo deu errado e não funcionou como esperado e quiser remover o container, imagem e volumes de seu ambiente local
+> If something went wrong and didn't work as expected and you want to remove the container, image and volumes from your local environment
 
 ```bash
 docker stop samba4-ad; \
@@ -306,27 +210,7 @@ docker rmi jarbelix/samba4-addc-fedora;
 ## Hub do Jarbelix
 * https://hub.docker.com/u/jarbelix
 
-## Se quiser criar imagens locais (buildar)
-
-```bash
-docker build -t samba-dc-fedora --no-cache .
-
-docker build -t samba-dc-debian --no-cache debian
-
-docker build -t samba-dc-ubuntu --no-cache ubuntu
-```
-
-## Listar imagens criadas localmente
-```bash
-docker images
-
-REPOSITORY              TAG             IMAGE ID       CREATED          SIZE
-samba-dc-ubuntu         latest          085b45ae4f5c   2 minutes ago    319MB
-samba-dc-debian         latest          3bdfb72696e3   3 minutes ago    364MB
-samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
-```
-
-## Links Úteis pra deploy
+## Useful links for deployment
 
 * Dockerfile reference - https://docs.docker.com/reference/dockerfile/
 * Docker Best Pratices - https://docs.docker.com/build/building/best-practices/
@@ -334,17 +218,15 @@ samba-dc-fedora         latest          b0bf28b7c145   11 minutes ago   564MB
 * Using Tags and Labels to Manage Docker Image Sprawl - https://www.docker.com/blog/docker-best-practices-using-tags-and-labels-to-manage-docker-image-sprawl/
 * CI/CD pipeline - https://github.com/marketplace/actions/docker-build-push-action
 
-## Desejando conhecer mais sobre Samba4, acesse a documentação que disponibilizei:
+## If you want to know more about Samba4, access the documentation I made available:
 * https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
 
-## Outras iniciativas de Samba4 e Docker
-
-Pesquisando na internet sobre, achei algumas outras referências:
+## Other Samba4 and Docker initiatives
 * https://github.com/Fmstrat/samba-domain
 * https://github.com/bodsch/docker-samba4
 * https://github.com/dperson/samba
 * https://github.com/tkaefer/alpine-samba-ad-container
-* https://helgeklein.com/blog/samba-active-directory-in-a-docker-container-installation-guide/ - Uma verdadeira aula
-* https://github.com/instantlinux/docker-tools/tree/main/images/samba-dc (Bem interessante e ativo)
-* https://github.com/diegogslomp/samba-ad-dc (Vários sabores: almalinux, debian, rocklinux, ubuntu)
+* https://helgeklein.com/blog/samba-active-directory-in-a-docker-container-installation-guide/ - A real lesson
+* https://github.com/instantlinux/docker-tools/tree/main/images/samba-dc (Very interesting and active)
+* https://github.com/diegogslomp/samba-ad-dc (Various flavors: almalinux, debian, rocklinux, ubuntu)
 
