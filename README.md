@@ -223,6 +223,8 @@ docker rmi jarbelix/samba4-addc-fedora;
 * https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
 
 ## Other Samba4 and Docker initiatives
+
+* https://github.com/diegogslomp/samba-ad-dc
 * https://github.com/Fmstrat/samba-domain - https://vinaysit.wordpress.com/2023/01/03/containerized-samba-active-directory-domain-controller-with-efk-stack/
 * https://github.com/bodsch/docker-samba4
 * https://github.com/dperson/samba
