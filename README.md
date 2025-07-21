@@ -1,4 +1,4 @@
-# Active Directory Domain Controller cwith Samba4.
+# Active Directory Domain Controller with Samba4.
 ```
  ____________________________________________________________________________
 /\                                                                           \
@@ -47,9 +47,10 @@ Let's look at some options and their pros and cons:
     * Larger and heavier image for builds.
 
 ## 🎯 Conclusion:
-    * If your goal is stability, documentation compatibility, and fewer headaches, `Debian` is the best choice.
-    * If you're already more comfortable with `Ubuntu`, especially on servers, it's also a great base.
-    * If you need the latest features (2019 level) of Samba4, use `Fedora`.
+
+* If your goal is stability, documentation compatibility, and fewer headaches, `Debian` is the best choice.
+* If you're already more comfortable with `Ubuntu`, especially on servers, it's also a great base.
+* If you need the latest features (2019 level) of Samba4, use `Fedora`.
 
 ## 🚀 How to run?
 
