@@ -1,4 +1,4 @@
-name: Workflow para Build e Push Multi Plataforma
+name: Workflow to Build and Push Multi Plataform
 # Reference: https://docs.docker.com/build/ci/github-actions/multi-platform/
 
 # Run workflow on every push to main branch
@@ -6,12 +6,12 @@ name: Workflow para Build e Push Multi Plataforma
 on:
   push:
     branches: [ main ]
-    # paths:
-    #   - '**'
-    #   - '!.github/workflows/**'
-    #   - '!.gitignore'
-    #   - '!README.md'
-    #   - '!LICENSE'
+    paths:
+      - '**'
+      - '!.github/workflows/**'
+      - '!.gitignore'
+      - '!README.md'
+      - '!LICENSE'
 
 # Your workflows jobs
 # Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
@@ -28,10 +28,10 @@ jobs:
 
     steps:
 
-      - name: Checkout do repositório de código
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Login no Docker Hub
+      - name: Docker Hub Login
         uses: docker/login-action@v3
         with:
           registry: ${{ vars.DOCKER_REGISTRY }}
