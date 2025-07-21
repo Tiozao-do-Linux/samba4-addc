@@ -182,7 +182,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 > See this article I wrote on my wiki: https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Docker
 
 
-## Visualiando Graficamente o LDAP
+## Graphically viewing LDAP
 
 > [!TIP]
 > One way to view LDAP without having to access the container is to install Apache Directory Studio (https://directory.apache.org/studio/) which is an excellent LDAP BROWSER
