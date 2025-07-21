@@ -17,7 +17,7 @@ if [ ! -f "${_SAMBA_CONF_DIR}/smb.conf" ]; then
    \_/_________________________________________________________________________/
 
 _EOF
-    echo_line "Provisionando Domínio ${_DOMAIN} com REALM ${_REALM} ..."
+    echo_line "Provisioning Domain ${_DOMAIN} with REALM ${_REALM} ..."
     sleep 5
     samba-tool domain provision \
         --server-role=dc \
