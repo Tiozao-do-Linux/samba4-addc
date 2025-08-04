@@ -12,6 +12,9 @@ on:
       - '!.gitignore'
       - '!README.md'
       - '!LICENSE'
+  schedule:
+    - cron: '0 0 * * *' # Example: Runs daily at midnight UTC
+  workflow_dispatch:  # Example: Runs workflow manually
 
 # Your workflows jobs
 # Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
