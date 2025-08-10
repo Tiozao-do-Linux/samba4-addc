@@ -1,4 +1,4 @@
-FROM debian:bookworm-backports
+FROM debian:trixie-backports
 
 # Desabilitar modo interativo para pacotes do debian apenas na fase de construção
 ARG DEBIAN_FRONTEND=noninteractive
@@ -9,7 +9,8 @@ RUN <<EOF
 apt-get update
 apt-get upgrade -y
 # Pacotes necessários
-apt-get install -t bookworm-backports -y samba samba-common-bin smbclient krb5-config krb5-user
+#apt-get install -t trixie-backports -y samba-ad-dc samba samba-common-bin smbclient krb5-config krb5-user
+apt-get install -y samba-ad-dc samba samba-common-bin smbclient krb5-config krb5-user
 # Pacotes extras
 apt-get install -y htop tree iputils-ping curl jq net-tools nmap
 apt-get clean
@@ -18,7 +19,7 @@ rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log
 EOF
 
 # Copia o entrypoint
-COPY entrypoint.sh /entrypoint.sh
+COPY ../entrypoint.sh /entrypoint.sh
 
 # Define volumes a serem pesistidos
 VOLUME /etc/samba /var/lib/samba /var/log/samba /root/provision

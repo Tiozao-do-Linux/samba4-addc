@@ -12,9 +12,6 @@ on:
       - '!.gitignore'
       - '!README.md'
       - '!LICENSE'
-  schedule:
-    - cron: '0 0 * * *' # Example: Runs daily at midnight UTC
-  workflow_dispatch:  # Example: Runs workflow manually
 
 # Your workflows jobs
 # Reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
@@ -53,7 +50,7 @@ jobs:
       #   with:
       #     images: ${{ matrix.image }}
       
-      - name: Build and push
+      - name: Build and push Fedora
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -63,3 +60,12 @@ jobs:
           push: true
           # file: ${{ matrix.dockerfile }}
           # tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Build and push Debian
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./debian/Dockerfile
+          tags: jarbelix/samba4-addc-debian:v1,jarbelix/samba4-addc-debian:latest
+          platforms: linux/amd64, linux/arm64
+          push: true

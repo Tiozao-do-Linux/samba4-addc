@@ -1,6 +1,6 @@
 services:
   samba-ad:
-    image: jarbelix/samba4-addc-fedora
+    image: jarbelix/samba4-addc-debian
     container_name: samba4-ad
     hostname: ${_NETBIOS:-dc01}
     cap_add:
@@ -10,7 +10,7 @@ services:
       - ${_DNS_FORWARDER_1:-1.1.1.1}
       - ${_DNS_FORWARDER_2:-8.8.8.8}
     env_file:
-      - .env
+      - ../.env
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - samba_etc:${_SAMBA_CONF_DIR:-/etc/samba}
@@ -34,8 +34,6 @@ services:
       # - "3268:3268/tcp" # LDAP GC
       # - "3269:3269/tcp" # LDAP GC SSL
     restart: unless-stopped
-    # tty: true
-    # stdin_open: true
 
 volumes:
   samba_etc:

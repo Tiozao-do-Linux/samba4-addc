@@ -12,7 +12,7 @@ if [ ! -f "${_SAMBA_CONF_DIR}/smb.conf" ]; then
  ____________________________________________________________________________
 /\                                                                           \
 \_|                 Active Directory Domain Controler - ADDC                 |
-  |                         Debian Linux com Samba4                          |
+  |                            Linux with Samba4                             |
   |   _______________________________________________________________________|_
    \_/_________________________________________________________________________/
 
@@ -28,22 +28,25 @@ _EOF
         --dns-backend=${_DNS_BACKEND:-SAMBA_INTERNAL} \
         --option="dns forwarder = ${_DNS_FORWARDER_1:-1.1.1.1} ${_DNS_FORWARDER_2:-8.8.8.8}" \
         --option="template shell = /bin/bash" \
-        --option="log level = 0"
+        --option="log level = 0" \
+        --option="ad dc functional level = 2016" \
+        --function-level=2016 \
+        --base-schema=2019
     
-    # Executar procedimentos após o provisionamento
+    # Perform procedures after provisioning
     if [ -f "${_PROVISION_DIR}/post-provision.sh" ]; then
         ${_PROVISION_DIR}/post-provision.sh
     fi
 fi
 
-# Copiar a configuração gerada para o kerberos
+# Copy the generated configuration to kerberos
 cp ${_SAMBA_LIB_DIR}/private/krb5.conf /etc/
 
-_DATE_TIME=`date`   #`date +%4Y/%m/%d-%H:%M:%S%z`
+_DATE_TIME=`date`
 
-echo_line "Domínio ${_DOMAIN} já provisionado. Iniciando em ${_DATE_TIME}..."
+echo_line "Domain ${_DOMAIN} already provisioned. Starting at ${_DATE_TIME}..."
 
-# Configurar o log level do servidor
+# Configure the server log level
 sed -i "s/log level = 0/log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5/g" ${_SAMBA_CONF_DIR}/smb.conf
 
 exec samba -i -M single
