@@ -1,6 +1,6 @@
 services:
   samba-ad:
-    image: jarbelix/samba4-addc-debian
+    image: jarbelix/samba4-addc:debian
     container_name: samba4-ad
     hostname: ${_NETBIOS:-dc01}
     cap_add:
