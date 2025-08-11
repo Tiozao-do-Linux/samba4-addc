@@ -9,6 +9,9 @@ on:
       - '!.gitignore'
       - '!README.md'
       - '!LICENSE'
+      - '!docker-compose.yml'
+      - '!debian/docker-compose.yml'
+      - '!ubuntu/docker-compose.yml'
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
