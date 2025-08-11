@@ -17,13 +17,13 @@ Let's look at some options and their pros and cons:
     * Samba is well supported on Debian, with up-to-date packages.
     * Samba community documentation often has examples for Debian.
     * Stable, predictable, and widely used in production environments.
-    * The *debian:bookworm-slim* image size is relatively small.
+    * The *debian:trixie-slim* image size is relatively small.
 * Cons:
     * Some packages may be slightly out of date compared to upstream
-    * Version **4.17.12-Debian**
+    * Version **Version 4.22.3-Debian-4.22.3+dfsg-4**
 * Alternative:
-    * Use the *debian:bookworm-backports* image which has the most up-to-date samba version.
-    * Version **4.22.2-Debian-4.22.2+dfsg-1~bpo12+1**
+    * Use the *debian:trixie-backports* image which has the most up-to-date samba version.
+    * Version **still wait backports in trixie**
 
 ## ✅ 2. Ubuntu
 * Pros:
