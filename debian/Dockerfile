@@ -1,7 +1,11 @@
-FROM debian:trixie-backports
+FROM debian:trixie-slim
 
 # Desabilitar modo interativo para pacotes do debian apenas na fase de construção
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Quando o trixie-backports estiver funcionando
+# echo 'deb http://deb.debian.org/debian trixie-backports main' > /etc/apt/sources.list.d/backports.list
+# apt-get install -t trixie-backports -y samba-ad-dc samba samba-common-bin smbclient krb5-config krb5-user
 
 # Install necessary packages
 RUN <<EOF
@@ -9,7 +13,6 @@ RUN <<EOF
 apt-get update
 apt-get upgrade -y
 # Pacotes necessários
-#apt-get install -t trixie-backports -y samba-ad-dc samba samba-common-bin smbclient krb5-config krb5-user
 apt-get install -y samba-ad-dc samba samba-common-bin smbclient krb5-config krb5-user
 # Pacotes extras
 apt-get install -y htop tree iputils-ping curl jq net-tools nmap
