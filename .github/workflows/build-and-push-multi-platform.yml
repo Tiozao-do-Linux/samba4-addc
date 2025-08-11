@@ -1,4 +1,4 @@
-name: Workflow to Build and Push Multi Plataform
+name: Workflow to Build and Push Multi-Platform
 # Reference: https://docs.docker.com/build/ci/github-actions/multi-platform/
 
 # Run workflow on every push to main branch
