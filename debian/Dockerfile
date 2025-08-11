@@ -13,7 +13,7 @@ RUN <<EOF
 apt-get update
 apt-get upgrade -y
 # Pacotes necessários
-apt-get install -y samba-ad-dc samba samba-common-bin smbclient krb5-config krb5-user
+apt-get install -y samba-ad-dc samba samba-common-bin smbclient krb5-config krb5-user ldb-tools
 # Pacotes extras
 apt-get install -y htop tree iputils-ping curl jq net-tools nmap
 apt-get clean
