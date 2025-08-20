@@ -39,7 +39,7 @@ Let's look at some options and their pros and cons:
 * Pros:
     * Usually more up-to-date (closer to upstream).
     * Good for testing or environments where you want to explore recent features.
-    * Version **4.22.2**
+    * Version **4.22.3**
 * Cons:
     * Fedora isn't as common on production servers.
     * Frequent updates (shorter lifecycle)
