@@ -8,12 +8,10 @@ on:
       - '**'
       - '!.github/workflows/**'
       - '!.gitignore'
+      - '!.dockerignore'
       - '!README.md'
       - '!LICENSE'
       - '!**/docker-compose.yml'
-      - '!debian/docker-compose.yml'
-      - '!ubuntu/docker-compose.yml'
-      - '!fedora/docker-compose.yml'
 
   schedule:
     - cron: '0 0 * * *' # Example: Runs every day at midnight UTC
