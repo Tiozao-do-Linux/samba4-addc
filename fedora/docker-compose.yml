@@ -16,7 +16,7 @@ services:
       - samba_etc:${_SAMBA_CONF_DIR:-/etc/samba}
       - samba_lib:${_SAMBA_LIB_DIR:-/var/lib/samba}
       - samba_logs:${_SAMBA_LOG_DIR:-/var/log/samba}
-      - ./provision:${_PROVISION_DIR:-/root/provision}
+      - ../provision:${_PROVISION_DIR:-/root/provision}
 
     # network_mode: "host"
     ports:
