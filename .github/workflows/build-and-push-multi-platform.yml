@@ -48,7 +48,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: fedora
-          file: ./Dockerfile
           tags: jarbelix/samba4-addc:fedora
           platforms: linux/amd64, linux/arm64
           push: true
@@ -57,7 +56,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: debian
-          file: ./Dockerfile
           tags: jarbelix/samba4-addc:debian
           platforms: linux/amd64, linux/arm64
           push: true
@@ -66,7 +64,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ubuntu
-          file: ./Dockerfile
           tags: jarbelix/samba4-addc:ubuntu
           platforms: linux/amd64, linux/arm64
           push: true
