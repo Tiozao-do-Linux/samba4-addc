@@ -1,6 +1,7 @@
 name: Workflow to Build and Push Multi-platform
 
 on:
+
   push:
     branches: [ main ]
     paths:
@@ -9,11 +10,15 @@ on:
       - '!.gitignore'
       - '!README.md'
       - '!LICENSE'
-      - '!docker-compose.yml'
+      - '!**/docker-compose.yml'
       - '!debian/docker-compose.yml'
       - '!ubuntu/docker-compose.yml'
+      - '!fedora/docker-compose.yml'
+
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # Example: Runs every day at midnight UTC
+    # - cron: '0 13 * * *' # Evety day at 13:00 UTC. Every day at 09:00 GMT-4 (Campo Grande/MS) ===> 09 + 4 = 13 UTC
+
   workflow_dispatch:
 
 jobs:
@@ -42,7 +47,7 @@ jobs:
       - name: Build and push Fedora
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: fedora
           file: ./Dockerfile
           tags: jarbelix/samba4-addc:fedora
           platforms: linux/amd64, linux/arm64
@@ -51,8 +56,17 @@ jobs:
       - name: Build and push Debian
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./debian/Dockerfile
+          context: debian
+          file: ./Dockerfile
           tags: jarbelix/samba4-addc:debian
+          platforms: linux/amd64, linux/arm64
+          push: true
+
+      - name: Build and push Ubuntu
+        uses: docker/build-push-action@v6
+        with:
+          context: ubuntu
+          file: ./Dockerfile
+          tags: jarbelix/samba4-addc:ubuntu
           platforms: linux/amd64, linux/arm64
           push: true

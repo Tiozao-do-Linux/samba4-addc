@@ -1,0 +1,11 @@
+.git
+*.log
+.env*
+tmp/
+screenshots/
+provision/
+fedora/
+debian/
+ubuntu/
+README.md
+LICENSE
