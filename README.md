@@ -215,6 +215,7 @@ docker rmi jarbelix/samba4-addc-fedora;
 
 * Dockerfile reference - https://docs.docker.com/reference/dockerfile/
 * Docker Best Pratices - https://docs.docker.com/build/building/best-practices/
+* Build context - https://docs.docker.com/build/concepts/context/
 * Choosing RUN, CMD and ENTRYPOINT - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/
 * Using Tags and Labels to Manage Docker Image Sprawl - https://www.docker.com/blog/docker-best-practices-using-tags-and-labels-to-manage-docker-image-sprawl/
 * CI/CD pipeline - https://github.com/marketplace/actions/docker-build-push-action
