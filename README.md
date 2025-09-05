@@ -60,10 +60,10 @@ Let's look at some options and their pros and cons:
 git clone https://github.com/Tiozao-do-Linux/samba4-addc.git
 
 # enter the directory
-cd samba4-addc
+cd samba4-addc/fedora
 
 # copy the env.example file to .env
-cp env.example .env
+cp ../env.example .env
 ```
 
 ### Configure your Active Directory domain and password
@@ -84,7 +84,7 @@ _DNS_FORWARDER_2="8.8.8.8"
 _DNS_BACKEND="SAMBA_INTERNAL"
 _TEMP_PASSWORD="TempSuperSecretPassword@2025"
 
-# Algunas configurações padrão:
+# Some default settings:
 #################################
 _SAMBA_CONF_DIR="/etc/samba"
 _SAMBA_LIB_DIR="/var/lib/samba"
