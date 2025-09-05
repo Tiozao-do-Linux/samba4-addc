@@ -179,7 +179,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.19 second
 >
 > Don't know how to generate a custom LDIF?
 
-> See this article I wrote on my wiki: https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Docker
+> See this article I wrote on my wiki: https://wiki.tiozaodolinux.com/Guide-for-Linux/Samba-Active-Directory-Docker-Container
 
 
 ## Graphically viewing LDAP
