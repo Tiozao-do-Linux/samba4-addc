@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
 RUN <<EOF
-# Atualiza pacotes
+# Update packages
 apt-get update
 apt-get upgrade -y
 # Required packages
@@ -17,13 +17,13 @@ rm -rf /var/lib/apt/lists/*
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
 
-# Copia o entrypoint
+# Copy entrypoint
 COPY ../entrypoint.sh /entrypoint.sh
 
-# Define volumes a serem pesistidos
+# Defines volumes to be supported
 VOLUME /etc/samba /var/lib/samba /var/log/samba /root/provision
 
-# Expondo portas
+# Exposing ports
 EXPOSE 53/udp 53/tcp 88/tcp 88/udp 135/tcp 139/tcp 389/tcp 389/udp 445/tcp 464/tcp 464/udp 636/tcp 3268/tcp 3269/tcp
 
 ENTRYPOINT ["/entrypoint.sh"]
