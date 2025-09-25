@@ -1,5 +1,10 @@
 FROM debian:trixie-backports
 
+# Labels
+LABEL description="Active Directory Domain Controller with Samba4"
+LABEL version="Debian Trixie"
+LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.com>"
+
 # Disable interactive mode for debian packages only in build phase
 ARG DEBIAN_FRONTEND=noninteractive
 
