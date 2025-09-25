@@ -1,5 +1,10 @@
 FROM ubuntu:22.04
 
+# Labels
+LABEL description="Active Directory Domain Controller with Samba4"
+LABEL version="Ubuntu 22.04"
+LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.com>"
+
 # Desabilitar modo interativo para pacotes do debian apenas na fase de construção
 ARG DEBIAN_FRONTEND=noninteractive
 
