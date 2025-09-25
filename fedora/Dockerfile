@@ -2,7 +2,7 @@ FROM fedora:42
 
 # Labels
 LABEL description="Active Directory Domain Controller with Samba4"
-LABEL version="1.0"
+LABEL version="Fedora 42"
 LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.com>"
 
 # Install packages
