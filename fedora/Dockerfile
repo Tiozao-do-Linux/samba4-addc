@@ -1,7 +1,7 @@
 FROM fedora:42
 
 # Labels
-LABEL description="Active Directory Domain Controller com Samba4"
+LABEL description="Active Directory Domain Controller with Samba4"
 LABEL version="1.0"
 LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.com>"
 
