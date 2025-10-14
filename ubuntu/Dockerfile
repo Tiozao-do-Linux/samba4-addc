@@ -1,11 +1,11 @@
-FROM ubuntu:22.04
+FROM ubuntu:latest
 
 # Labels
 LABEL description="Active Directory Domain Controller with Samba4"
-LABEL version="Ubuntu 22.04"
+LABEL version="Ubuntu Latest"
 LABEL org.opencontainers.image.authors="Tiozão do Linux <jarbas.junior@gmail.com>"
 
-# Desabilitar modo interativo para pacotes do debian apenas na fase de construção
+# Disable interactive mode for debian packages only in build phase
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
@@ -18,15 +18,13 @@ rm -rf /var/lib/apt/lists/*
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
 
-# Copia o entrypoint
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Copy entrypoint
+COPY ../entrypoint.sh /entrypoint.sh
 
-# Define volumes
-VOLUME /etc/samba /var/lib/samba /var/log/samba
+# Defines volumes to be supported
+VOLUME /etc/samba /var/lib/samba /var/log/samba /root/provision
 
-# Expondo portas
-EXPOSE 53/udp 53/tcp 88/tcp 88/udp 135/tcp 137/udp 138/udp 139/tcp \
-       389/tcp 389/udp 445/tcp 464/tcp 464/udp 3268/tcp 3269/tcp
+# Exposing ports
+EXPOSE 53/udp 53/tcp 88/tcp 88/udp 135/tcp 139/tcp 389/tcp 389/udp 445/tcp 464/tcp 464/udp 636/tcp 3268/tcp 3269/tcp       
 
 ENTRYPOINT ["/entrypoint.sh"]
