@@ -29,11 +29,11 @@ Let's look at some options and their pros and cons:
 * Pros:
     * Based on Debian, with generally newer packages in LTS versions.
     * Good documentation and an active community.
-    * Ubuntu version: 20.04 or 22.04 LTS is an excellent stable base.
+    * Ubuntu version: 24.04 or latest LTS is an excellent stable base.
 * Cons:
     * The image is slightly larger than the Debian one.
     * May have more layers of complexity than systemd, depending on what you need to run.
-    * Version **4.15.13-Ubuntu**
+    * Version **4.19.5-Ubuntu**
 
 ## ✅ 3. Fedora 42 (recomended)
 * Pros:
