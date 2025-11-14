@@ -28,8 +28,8 @@ services:
       # - "139:139/tcp" # NetBIOS
       # - "445:445/tcp" # SMB
       # - "464:464/tcp" # Kpasswd5
-      - "389:389/tcp" # LDAP
-      - "389:389/udp" # LDAP
+      # - "389:389/tcp" # LDAP
+      # - "389:389/udp" # LDAP
       - "636:636/tcp" # LDAP SSL
       # - "3268:3268/tcp" # LDAP GC
       # - "3269:3269/tcp" # LDAP GC SSL
