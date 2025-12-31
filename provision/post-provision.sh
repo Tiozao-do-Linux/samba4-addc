@@ -30,7 +30,7 @@ echo_line "Do not expire Administrator password"
 samba-tool user setexpiry Administrator --noexpiry
 
 echo_line "Setting Domain Password Policies"
-samba-tool domain passwordsettings set --complexity=on --history-length=3 --min-pwd-age=0 --max-pwd-age=365 --min-pwd-length=8
+samba-tool domain passwordsettings set --complexity=on --history-length=3 --min-pwd-age=10 --max-pwd-age=365 --min-pwd-length=8 --account-lockout-threshold=5 --reset-account-lockout-after=30 --account-lockout-duration=30
 
 echo_line "Viewing Domain Password Policies"
 samba-tool domain passwordsettings show
