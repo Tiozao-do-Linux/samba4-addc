@@ -23,7 +23,7 @@ Let's look at some options and their pros and cons:
     * Version **Version 4.22.3-Debian-4.22.3+dfsg-4**
 * Alternative:
     * Use the *debian:trixie-backports* image which has the most up-to-date samba version.
-    * Version **Version 4.22.4-Debian-4.22.4+dfsg-1~deb13u1**
+    * Version **Version 4.23.4-Debian-4.23.4+dfsg-1~bpo13+1**
 
 ## ✅ 2. Ubuntu
 * Pros:
@@ -39,7 +39,7 @@ Let's look at some options and their pros and cons:
 * Pros:
     * Usually more up-to-date (closer to upstream).
     * Good for testing or environments where you want to explore recent features.
-    * Version **4.22.4**
+    * Version **4.23.4**
 * Cons:
     * Fedora isn't as common on production servers.
     * Frequent updates (shorter lifecycle)
