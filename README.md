@@ -35,7 +35,7 @@ Let's look at some options and their pros and cons:
     * May have more layers of complexity than systemd, depending on what you need to run.
     * Version **4.19.5-Ubuntu**
 
-## ✅ 3. Fedora 42 (recomended)
+## ✅ 3. Fedora 43 (recomended)
 * Pros:
     * Usually more up-to-date (closer to upstream).
     * Good for testing or environments where you want to explore recent features.
