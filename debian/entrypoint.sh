@@ -46,7 +46,6 @@ _DATE_TIME=`date`
 
 echo_line "Domain ${_DOMAIN} already provisioned. Starting at ${_DATE_TIME}..."
 
-# Configure the server log level
-sed -i "s/log level = 0/log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5/g" ${_SAMBA_CONF_DIR}/smb.conf
+sed -i "s/^[[:space:]]*log level = .*/        log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5/" ${_SAMBA_CONF_DIR}/smb.conf
 
 exec samba -i -M single
