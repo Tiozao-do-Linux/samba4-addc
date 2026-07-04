@@ -9,7 +9,7 @@ on:
       - '!.github/workflows/**'
       - '!.gitignore'
       - '!.dockerignore'
-      - '!README.md'
+      - '!*.md'
       - '!LICENSE'
       - '!**/docker-compose.yml'
 
