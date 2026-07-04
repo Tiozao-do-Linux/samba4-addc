@@ -11,7 +11,7 @@ dnf install -y net-tools htop ccze duf nmap
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
 
-COPY entrypoint.sh /entrypoint.sh
+COPY ../entrypoint.sh /entrypoint.sh
 
 VOLUME /etc/samba /var/lib/samba /var/log/samba /root/provision
 
