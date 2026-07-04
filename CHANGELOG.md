@@ -18,8 +18,6 @@
 ### Entrypoints
 - Moved single `entrypoint.sh` to project root; removed duplicates in `ubuntu/`, `debian/`, `fedora/`
 - Fixed `sed` regex from `log level = 0` to `^[[:space:]]*log level = .*` so it works on every restart regardless of current log level value
-- Samba now runs in daemon mode (`-M single` without `-i`) and logs are streamed to stdout via `tail -F /var/log/samba/log.samba` — logs are written to files (persisted in `samba_logs` volume) AND visible via `docker compose logs -f`
-- Added `--option="log file = /var/log/samba/log.samba"` to provision command; added fallback to inject log file setting in smb.conf for already-provisioned domains
 
 ### env.example
 - Added `_CONTAINER_NAME` variable

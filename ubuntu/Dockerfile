@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN <<EOF
 apt-get update
 apt-get install -y samba samba-common-bin smbclient krb5-config krb5-user
-apt install -y ldb-tools winbind libnss-winbind libpam-winbind
+apt-get install -y ldb-tools winbind libnss-winbind libpam-winbind
 apt-get install -y htop tree iputils-ping curl jq net-tools nmap
 apt-get clean
 rm -rf /var/lib/apt/lists/*
