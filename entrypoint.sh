@@ -33,13 +33,11 @@ _EOF
         --function-level=2016 \
         --base-schema=2019
     
-    # Perform procedures after provisioning
     if [ -f "${_PROVISION_DIR}/post-provision.sh" ]; then
         ${_PROVISION_DIR}/post-provision.sh
     fi
 fi
 
-# Copy the generated configuration to kerberos
 cp ${_SAMBA_LIB_DIR}/private/krb5.conf /etc/
 
 _DATE_TIME=`date`
@@ -48,4 +46,8 @@ echo_line "Domain ${_DOMAIN} already provisioned. Starting at ${_DATE_TIME}..."
 
 sed -i "s/^[[:space:]]*log level = .*/        log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5/" ${_SAMBA_CONF_DIR}/smb.conf
 
-exec samba -i -M single
+samba -i -M single
+
+# HINT: To keep the logs in the files
+# #1 samba -M single
+# #2 exec tail -F /var/log/samba/log.samba 2>/dev/null

@@ -2,8 +2,8 @@ services:
   samba-ad:
     image: jarbelix/samba4-addc:fedora
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: fedora/Dockerfile
     container_name: ${_CONTAINER_NAME:-samba4-ad}
     hostname: ${_NETBIOS:-dc01}
     cap_add:
