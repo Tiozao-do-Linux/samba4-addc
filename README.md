@@ -208,8 +208,8 @@ docker volume rm $( docker volume ls -q | grep samba ); \
 docker rmi jarbelix/samba4-addc-fedora; 
 ```
 
-## Hub do Jarbelix
-* https://hub.docker.com/u/jarbelix
+## Dcker image available
+* [Docker Hub](https://hub.docker.com/u/jarbelix)
 
 ## Useful links for deployment
 
