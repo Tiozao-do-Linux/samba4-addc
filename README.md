@@ -218,7 +218,7 @@ docker rmi jarbelix/samba4-addc-fedora;
 * Build context - https://docs.docker.com/build/concepts/context/
 * Choosing RUN, CMD and ENTRYPOINT - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/
 * Using Tags and Labels to Manage Docker Image Sprawl - https://www.docker.com/blog/docker-best-practices-using-tags-and-labels-to-manage-docker-image-sprawl/
-* CI/CD pipeline - https://github.com/marketplace/actions/docker-build-push-action
+* CI/CD pipeline - https://github.com/marketplace/actions/build-and-push-docker-images
 
 ## If you want to know more about Samba4, access the documentation I made available:
 * https://wiki.tiozaodolinux.com/Guide-for-Linux/Active-Directory-With-Samba-4#primeiro-dc-dc01
