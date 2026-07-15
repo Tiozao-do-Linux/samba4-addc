@@ -8,6 +8,7 @@ RUN <<EOF
 dnf -y upgrade --refresh
 dnf install -y samba samba-dc samba-client krb5-workstation
 dnf install -y net-tools htop ccze duf nmap
+dnf clean all
 rm -rf /etc/samba/smb.conf /var/run/samba/* /var/lib/samba/* /var/log/samba/*log* /etc/krb5.conf
 EOF
 
