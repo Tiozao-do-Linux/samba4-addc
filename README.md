@@ -23,7 +23,7 @@ Let's look at some options and their pros and cons:
     * Version **Version 4.22.3-Debian-4.22.3+dfsg-4**
 * Alternative:
     * Use the *debian:trixie-backports* image which has the most up-to-date samba version.
-    * Version **4.24.3-Debian-4.24.3+dfsg-1~bpo13+1**
+    * Version **4.24.7-Debian-4.24.7+dfsg-1~bpo13+1**
 
 ## ✅ 2. Ubuntu
 * Pros:
@@ -39,7 +39,7 @@ Let's look at some options and their pros and cons:
 * Pros:
     * Usually more up-to-date (closer to upstream).
     * Good for testing or environments where you want to explore recent features.
-    * Version **4.24.3**
+    * Version **4.25.1**
 * Cons:
     * Fedora isn't as common on production servers.
     * Frequent updates (shorter lifecycle)
@@ -50,7 +50,7 @@ Let's look at some options and their pros and cons:
 
 * If your goal is stability, documentation compatibility, and fewer headaches, `Debian` is the best choice.
 * If you're already more comfortable with `Ubuntu`, especially on servers, it's also a great base.
-* If you need the latest features (2019 level) of Samba4, use `Fedora`.
+* If you need the latest features (Version 4.25) of Samba4, use `Fedora`.
 
 ## 🚀 How to run?
 
@@ -90,6 +90,8 @@ _SAMBA_CONF_DIR="/etc/samba"
 _SAMBA_LIB_DIR="/var/lib/samba"
 _SAMBA_LOG_DIR="/var/log/samba"
 _PROVISION_DIR="/root/provision"
+
+_CONTAINER_NAME=samba4-ad
 ```
 
 ### Run the container
@@ -131,6 +133,7 @@ docker exec -it samba4-ad bash
 [global]
 	ad dc functional level = 2016
 	dns forwarder = 1.1.1.1 8.8.8.8
+    log level = 1 auth_json_audit:3 dsdb_json_audit:5 dsdb_password_json_audit:5 dsdb_group_json_audit:5 dsdb_transaction_json_audit:5
 	netbios name = DC01
 	realm = SEUDOMINIO.COM.BR
 	server role = active directory domain controller

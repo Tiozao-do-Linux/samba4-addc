@@ -46,10 +46,11 @@ _EOF
         --option="log level = 0" \
         --option="ad dc functional level = 2016" \
         --function-level=2016 \
-        --base-schema=2019 >/dev/null 2>&1
+        --base-schema=2019 >/tmp/samba-provision.log 2>&1
     _RET=$?
     if [ $_RET -ne 0 ]; then
         echo_line "Provisioning failed with error code: $_RET"
+        cat /tmp/samba-provision.log
         exit $_RET
     fi    
     echo_line "Provisioning completed successfully!"
